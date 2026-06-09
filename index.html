@@ -67,16 +67,16 @@
   .paper-title{font-weight:600;color:var(--text);max-width:350px}
   .paper-authors{color:var(--muted);font-size:11px;max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-right:4px}
-  .tag-single-cell-atlas{background:rgba(79,156,249,0.15);color:#4f9cf9}
-  .tag-ad-neurodegeneration{background:rgba(239,68,68,0.15);color:#ef4444}
-  .tag-lc-norepinephrine{background:rgba(52,211,153,0.15);color:#34d399}
-  .tag-behavioral-methods{background:rgba(251,191,36,0.15);color:#fbbf24}
-  .tag-ml{background:rgba(244,114,182,0.15);color:#f472b6}
-  .tag-connectomics{background:rgba(56,189,248,0.15);color:#38bdf8}
-  .tag-motion-tracking---robotics{background:rgba(163,230,53,0.15);color:#a3e635}
-  .tag-computational{background:rgba(167,139,250,0.15);color:#a78bfa}
-  .tag-aging{background:rgba(249,115,22,0.15);color:#f97316}
-  .tag-review{background:rgba(148,163,184,0.15);color:#94a3b8}
+  /* Tag input widget */
+  .tag-input-wrap{display:flex;flex-wrap:wrap;gap:4px;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;min-height:38px;cursor:text}
+  .tag-input-wrap:focus-within{border-color:var(--accent)}
+  .tag-input-wrap input{background:none;border:none;color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;outline:none;flex:1;min-width:80px;padding:2px 0}
+  .tag-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(79,156,249,0.15);color:#4f9cf9}
+  .tag-pill-x{cursor:pointer;font-size:13px;line-height:1;opacity:0.6}
+  .tag-pill-x:hover{opacity:1}
+  .tag-suggest{position:relative;display:none;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;margin-top:4px;max-height:200px;overflow-y:auto;z-index:20}
+  .tag-suggest-item{padding:6px 12px;font-size:12px;cursor:pointer}
+  .tag-suggest-item:hover{background:var(--bg3);color:var(--accent)}
   .status-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px}
   .status-read{background:var(--green)}.status-reading{background:var(--yellow)}.status-unread{background:var(--muted)}
 
@@ -152,35 +152,7 @@
     <input class="search-input" id="searchInput" placeholder="Search title, authors, keywords, brain region, methods...">
     <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear</button>
   </div>
-  <div class="filter-row">
-    <span class="filter-label">Type:</span>
-    <button class="chip active" data-filter="type" data-value="all">All</button>
-    <button class="chip" data-filter="type" data-value="single-cell atlas">Single-Cell Atlas</button>
-    <button class="chip" data-filter="type" data-value="AD/neurodegeneration">AD/Neurodegeneration</button>
-    <button class="chip" data-filter="type" data-value="LC/norepinephrine">LC/Norepinephrine</button>
-    <button class="chip" data-filter="type" data-value="behavioral methods">Behavioral Methods</button>
-    <button class="chip" data-filter="type" data-value="computational">Computational</button>
-    <button class="chip" data-filter="type" data-value="aging">Aging</button>
-    <button class="chip" data-filter="type" data-value="review">Review</button>
-    <button class="chip" data-filter="type" data-value="ML">ML</button>
-  </div>
-  <div class="filter-row">
-    <span class="filter-label">Model:</span>
-    <button class="chip active" data-filter="species" data-value="all">All</button>
-    <button class="chip" data-filter="species" data-value="mouse">Mouse</button>
-    <button class="chip" data-filter="species" data-value="human">Human</button>
-    <button class="chip" data-filter="species" data-value="rat">Rat</button>
-  </div>
-  <div class="filter-row">
-    <span class="filter-label">Region:</span>
-    <button class="chip active" data-filter="region" data-value="all">All</button>
-    <button class="chip" data-filter="region" data-value="LC">LC</button>
-    <button class="chip" data-filter="region" data-value="PFC">PFC</button>
-    <button class="chip" data-filter="region" data-value="brain">Whole Brain</button>
-    <button class="chip" data-filter="region" data-value="amygdala">Amygdala</button>
-    <button class="chip" data-filter="region" data-value="entorhinal">Entorhinal</button>
-    <button class="chip" data-filter="region" data-value="hypothalamus">Hypothalamus</button>
-  </div>
+  <div class="filter-row" id="tagFilterRow"></div>
   <div id="libraryContent"></div>
 </div>
 
@@ -202,20 +174,13 @@
       <div class="form-group"><label>DOI</label><input id="f-doi"></div>
       <div class="form-group"><label>Species / Model</label><input id="f-species" placeholder="e.g. mouse, rat, human"></div>
       <div class="form-group"><label>Brain Region / Topic</label><input id="f-region" placeholder="e.g. LC, VTA, PFC, spinal cord"></div>
-      <div class="form-group">
-        <label>Study Type</label>
-        <select id="f-type">
-          <option value="single-cell atlas">Single-Cell Atlas</option>
-          <option value="AD/neurodegeneration">AD/Neurodegeneration</option>
-          <option value="LC/norepinephrine">LC/Norepinephrine</option>
-          <option value="behavioral methods">Behavioral Methods</option>
-          <option value="computational">Computational</option>
-          <option value="aging">Aging</option>
-          <option value="review">Review</option>
-          <option value="ML">ML</option>
-          <option value="connectomics">Connectomics</option>
-          <option value="motion tracking / robotics">Motion Tracking / Robotics</option>
-        </select>
+      <div class="form-group full">
+        <label>Tags</label>
+        <div class="tag-input-wrap" id="tagInputWrap" onclick="document.getElementById('f-tags').focus()">
+          <span id="tagPills"></span>
+          <input id="f-tags" placeholder="Type and press Enter..." autocomplete="off">
+        </div>
+        <div class="tag-suggest" id="tagSuggest"></div>
       </div>
       <div class="form-group"><label>Methods</label><input id="f-methods" placeholder="e.g. SLEAP, optogenetics, calcium imaging"></div>
       <div class="form-group">
@@ -375,7 +340,8 @@ async function saveToCloud(data) {
 let papers = [];
 let editingId = null;
 let sortCol = 'year', sortAsc = false;
-let activeTypeFilter = 'all', activeStatusFilter = 'all', activeSpeciesFilter = 'all', activeRegionFilter = 'all';
+let activeTags = new Set();
+let currentFormTags = [];
 let _saveTimer = null;
 
 // Save: write to localStorage immediately, debounce GitHub push
@@ -394,6 +360,48 @@ function save() {
     setSyncStatus(ok ? 'saved' : 'error', ok ? 'Saved' : 'Save failed');
     if (ok) setTimeout(() => setSyncStatus('saved', 'Synced'), 2000);
   }, 2000);
+}
+
+// =====================================================================
+// TAGS SYSTEM
+// =====================================================================
+const TAG_PALETTE = [
+  {bg:'rgba(79,156,249,0.15)',fg:'#4f9cf9'},
+  {bg:'rgba(52,211,153,0.15)',fg:'#34d399'},
+  {bg:'rgba(239,68,68,0.15)',fg:'#ef4444'},
+  {bg:'rgba(251,191,36,0.15)',fg:'#fbbf24'},
+  {bg:'rgba(167,139,250,0.15)',fg:'#a78bfa'},
+  {bg:'rgba(244,114,182,0.15)',fg:'#f472b6'},
+  {bg:'rgba(56,189,248,0.15)',fg:'#38bdf8'},
+  {bg:'rgba(249,115,22,0.15)',fg:'#f97316'},
+  {bg:'rgba(163,230,53,0.15)',fg:'#a3e635'},
+  {bg:'rgba(148,163,184,0.15)',fg:'#94a3b8'},
+];
+function tagColor(tag) {
+  let h = 0;
+  for (let i = 0; i < tag.length; i++) h = ((h << 5) - h + tag.charCodeAt(i)) | 0;
+  return TAG_PALETTE[Math.abs(h) % TAG_PALETTE.length];
+}
+function tagHtml(t) {
+  const c = tagColor(t);
+  return `<span class="tag" style="background:${c.bg};color:${c.fg}">${esc(t)}</span>`;
+}
+function getTags(p) {
+  if (Array.isArray(p.tags) && p.tags.length) return p.tags;
+  if (p.type) return [p.type];
+  return [];
+}
+function getAllTags() {
+  const counts = {};
+  papers.forEach(p => getTags(p).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).map(e => e[0]);
+}
+function migrateTags() {
+  papers.forEach(p => {
+    if (!Array.isArray(p.tags)) {
+      p.tags = p.type ? [p.type] : [];
+    }
+  });
 }
 
 // Init: load from GitHub first, fall back to cache, then static file
@@ -446,6 +454,8 @@ async function init() {
     setSyncStatus('error', 'No data');
   }
 
+  migrateTags();
+  renderTagFilters();
   renderLibrary();
 }
 
@@ -501,12 +511,12 @@ function renderLibrary() {
   renderStats();
   const query = document.getElementById('searchInput').value.toLowerCase().trim();
   let filtered = papers.filter(p => {
-    if (activeTypeFilter !== 'all' && p.type !== activeTypeFilter) return false;
-    if (activeStatusFilter !== 'all' && p.status !== activeStatusFilter) return false;
-    if (activeSpeciesFilter !== 'all' && !(p.species || '').toLowerCase().includes(activeSpeciesFilter.toLowerCase())) return false;
-    if (activeRegionFilter !== 'all' && !(p.region || '').toLowerCase().includes(activeRegionFilter.toLowerCase())) return false;
+    if (activeTags.size > 0) {
+      const pt = getTags(p);
+      if (!Array.from(activeTags).every(t => pt.includes(t))) return false;
+    }
     if (query) {
-      const haystack = [p.title,p.authors,p.journal,p.species,p.region,p.methods,p.findings,p.notes,p.project,p.abstract,p.funding].join(' ').toLowerCase();
+      const haystack = [p.title,p.authors,p.journal,p.species,p.region,p.methods,p.findings,p.notes,p.project,p.abstract,p.funding,...getTags(p)].join(' ').toLowerCase();
       return query.split(/\s+/).every(w => haystack.includes(w));
     }
     return true;
@@ -538,19 +548,18 @@ function renderLibrary() {
       <th onclick="sortBy('title')">Title${arrow('title')}</th>
       <th onclick="sortBy('year')" style="width:50px">Year${arrow('year')}</th>
       <th onclick="sortBy('journal')" style="width:90px">Journal${arrow('journal')}</th>
-      <th onclick="sortBy('type')" style="width:80px">Type${arrow('type')}</th>
+      <th>Tags</th>
       <th onclick="sortBy('species')" style="width:60px">Model${arrow('species')}</th>
       <th onclick="sortBy('region')" style="width:80px">Region${arrow('region')}</th>
       <th>Findings</th>
     </tr></thead>
     <tbody>${filtered.map(p => {
-      const typeClass = 'tag-' + (p.type || 'review').replace(/[\/\s]+/g, '-').toLowerCase();
       return `<tr onclick="openDetail('${p.id}')">
         <td><span class="status-dot status-${p.status||'unread'}" onclick="event.stopPropagation();toggleStatus('${p.id}')" title="Click to toggle" style="cursor:pointer"></span></td>
         <td><div class="paper-title">${esc(p.title||'Untitled')}</div><div class="paper-authors">${esc(p.authors||'')}</div></td>
         <td>${p.year||''}</td>
         <td style="font-size:11px;color:var(--muted)">${esc(p.journal||'')}${p.doi ? ' <a href="'+(p.doi.startsWith('http')?esc(p.doi):'https://doi.org/'+esc(p.doi))+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent);font-size:10px">'+(p.doi.startsWith('http')?'Link':'DOI')+'</a>' : ''}</td>
-        <td><span class="tag ${typeClass}" style="font-size:10px;padding:2px 7px">${p.type||'?'}</span></td>
+        <td style="max-width:180px">${getTags(p).map(t => tagHtml(t)).join(' ')}</td>
         <td style="font-size:11px">${esc(p.species||'')}</td>
         <td style="font-size:11px">${esc(p.region||'')}</td>
         <td style="font-size:11px;color:var(--muted)">${esc((p.findings||'').substring(0,200))}${(p.findings||'').length>200?'...':''}</td>
@@ -592,27 +601,95 @@ function renderStats() {
 function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
 
 // =====================================================================
-// FILTERS
+// TAG FILTERS (auto-generated)
 // =====================================================================
-document.querySelectorAll('.chip').forEach(chip => {
-  chip.addEventListener('click', function() {
-    const filterType = this.dataset.filter;
-    const val = this.dataset.value;
-    document.querySelectorAll(`.chip[data-filter="${filterType}"]`).forEach(c => c.classList.remove('active'));
-    this.classList.add('active');
-    if (filterType === 'type') activeTypeFilter = val;
-    if (filterType === 'status') activeStatusFilter = val;
-    if (filterType === 'species') activeSpeciesFilter = val;
-    if (filterType === 'region') activeRegionFilter = val;
-    renderLibrary();
+function renderTagFilters() {
+  const allTags = getAllTags();
+  const row = document.getElementById('tagFilterRow');
+  row.innerHTML = '<span class="filter-label">Tags:</span>' +
+    `<button class="chip${activeTags.size === 0 ? ' active' : ''}" data-tag="__all__">All</button>` +
+    allTags.map(t => {
+      const c = tagColor(t);
+      const count = papers.filter(p => getTags(p).includes(t)).length;
+      return `<button class="chip${activeTags.has(t) ? ' active' : ''}" data-tag="${esc(t)}" style="${activeTags.has(t) ? 'background:'+c.bg+';color:'+c.fg+';border-color:'+c.fg : ''}">${esc(t)} <span style="opacity:0.6">${count}</span></button>`;
+    }).join('');
+  row.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', function() {
+      const val = this.dataset.tag;
+      if (val === '__all__') { activeTags.clear(); }
+      else if (activeTags.has(val)) { activeTags.delete(val); }
+      else { activeTags.add(val); }
+      renderTagFilters();
+      renderLibrary();
+    });
   });
-});
+}
+
 document.getElementById('searchInput').addEventListener('input', renderLibrary);
 window.clearFilters = function() {
   document.getElementById('searchInput').value = '';
-  activeTypeFilter = 'all'; activeStatusFilter = 'all'; activeSpeciesFilter = 'all'; activeRegionFilter = 'all';
-  document.querySelectorAll('.chip').forEach(c => { c.classList.toggle('active', c.dataset.value === 'all'); });
+  activeTags.clear();
+  renderTagFilters();
   renderLibrary();
+};
+
+// =====================================================================
+// TAG INPUT WIDGET (add/edit form)
+// =====================================================================
+const tagInput = document.getElementById('f-tags');
+const tagPillsEl = document.getElementById('tagPills');
+const tagSuggestEl = document.getElementById('tagSuggest');
+
+function renderFormTagPills() {
+  tagPillsEl.innerHTML = currentFormTags.map((t, i) => {
+    const c = tagColor(t);
+    return `<span class="tag-pill" style="background:${c.bg};color:${c.fg}">${esc(t)} <span class="tag-pill-x" onclick="event.stopPropagation();removeFormTag(${i})">×</span></span>`;
+  }).join('');
+}
+
+window.removeFormTag = function(i) {
+  currentFormTags.splice(i, 1);
+  renderFormTagPills();
+};
+
+tagInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' || e.key === ',') {
+    e.preventDefault();
+    const val = this.value.trim().replace(/,+$/, '');
+    if (val && !currentFormTags.includes(val)) {
+      currentFormTags.push(val);
+      renderFormTagPills();
+    }
+    this.value = '';
+    tagSuggestEl.style.display = 'none';
+  }
+  if (e.key === 'Backspace' && !this.value && currentFormTags.length) {
+    currentFormTags.pop();
+    renderFormTagPills();
+  }
+});
+
+tagInput.addEventListener('input', function() {
+  const val = this.value.toLowerCase().trim();
+  if (!val) { tagSuggestEl.style.display = 'none'; return; }
+  const suggestions = getAllTags().filter(t => t.toLowerCase().includes(val) && !currentFormTags.includes(t));
+  if (!suggestions.length) { tagSuggestEl.style.display = 'none'; return; }
+  tagSuggestEl.innerHTML = suggestions.slice(0, 8).map(t => {
+    const c = tagColor(t);
+    return `<div class="tag-suggest-item" onmousedown="addSuggestedTag('${esc(t).replace(/'/g, "\\'")}')">${tagHtml(t)}</div>`;
+  }).join('');
+  tagSuggestEl.style.display = 'block';
+});
+
+tagInput.addEventListener('blur', () => { setTimeout(() => { tagSuggestEl.style.display = 'none'; }, 150); });
+
+window.addSuggestedTag = function(tag) {
+  if (!currentFormTags.includes(tag)) {
+    currentFormTags.push(tag);
+    renderFormTagPills();
+  }
+  tagInput.value = '';
+  tagSuggestEl.style.display = 'none';
 };
 
 // =====================================================================
@@ -699,7 +776,7 @@ window.savePaper = function() {
     doi: document.getElementById('f-doi').value.trim(),
     species: document.getElementById('f-species').value.trim(),
     region: document.getElementById('f-region').value.trim(),
-    type: document.getElementById('f-type').value,
+    tags: [...currentFormTags],
     methods: document.getElementById('f-methods').value.trim(),
     status: document.getElementById('f-status').value,
     project: document.getElementById('f-project').value.trim(),
@@ -720,6 +797,7 @@ window.savePaper = function() {
   }
   save();
   clearAddForm();
+  renderTagFilters();
   switchTabDirect('library');
   renderLibrary();
 };
@@ -729,7 +807,9 @@ window.clearAddForm = function() {
   ['title','authors','year','journal','doi','species','region','methods','project','funding','abstract','findings','notes'].forEach(f => {
     document.getElementById('f-'+f).value = '';
   });
-  document.getElementById('f-type').value = 'single-cell atlas';
+  currentFormTags = [];
+  renderFormTagPills();
+  document.getElementById('f-tags').value = '';
   document.getElementById('f-status').value = 'unread';
   document.getElementById('doiStatus').textContent = '';
 };
@@ -742,7 +822,9 @@ window.editPaper = function(id) {
   ['title','authors','year','journal','doi','species','region','methods','project','funding','abstract','findings','notes'].forEach(f => {
     document.getElementById('f-'+f).value = p[f] || '';
   });
-  document.getElementById('f-type').value = p.type || 'single-cell atlas';
+  currentFormTags = [...getTags(p)];
+  renderFormTagPills();
+  document.getElementById('f-tags').value = '';
   document.getElementById('f-status').value = p.status || 'unread';
   switchTabDirect('add');
 };
@@ -765,7 +847,7 @@ window.openDetail = function(id) {
     <p style="font-size:13px;color:var(--muted);margin-bottom:16px">${esc(p.authors||'')} ${p.year ? '('+p.year+')' : ''} &middot; <em>${esc(p.journal||'')}</em>
       ${p.doi ? ' &middot; <a href="https://doi.org/'+esc(p.doi)+'" target="_blank" style="color:var(--accent)">DOI</a>' : ''}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-      <span class="tag tag-${(p.type||'review').replace(/[\/\s]+/g, '-').toLowerCase()}">${p.type||'?'}</span>
+      ${getTags(p).map(t => tagHtml(t)).join(' ')}
       <span class="status-dot status-${p.status||'unread'}" onclick="toggleStatus('${p.id}');openDetail('${p.id}')" style="cursor:pointer"></span><span style="font-size:12px;cursor:pointer" onclick="toggleStatus('${p.id}');openDetail('${p.id}')">${p.status||'unread'}</span>
       ${p.species ? '<span style="font-size:12px;color:var(--muted)">Model: <strong style="color:var(--text)">'+esc(p.species)+'</strong></span>' : ''}
       ${p.region ? '<span style="font-size:12px;color:var(--muted)">Region: <strong style="color:var(--text)">'+esc(p.region)+'</strong></span>' : ''}
@@ -869,7 +951,7 @@ window.generateClaudePrompt = function() {
   else subset = papers;
   if (subset.length === 0) { alert('No papers match this filter.'); return; }
 
-  const prompt = `I have ${subset.length} academic papers. For each, extract the following fields from the abstract/title. Return a JSON array.\n\nFields to extract:\n- doi (string, keep as-is)\n- species (e.g. "mouse", "rat", "human", "in vitro")\n- region (brain region or topic)\n- type ("single-cell atlas", "AD/neurodegeneration", "LC/norepinephrine", "behavioral methods", "computational", "aging", "review")\n- methods (key techniques, comma-separated)\n- findings (1-2 sentence summary)\n- funding (if mentioned)\n\nPapers:\n${subset.map((p, i) => `\n--- Paper ${i+1} ---\nDOI: ${p.doi || 'N/A'}\nTitle: ${p.title}\nAbstract: ${(p.abstract || 'No abstract available').substring(0, 500)}`).join('\n')}\n\nReturn ONLY a JSON array.`;
+  const prompt = `I have ${subset.length} academic papers. For each, extract the following fields from the abstract/title. Return a JSON array.\n\nFields to extract:\n- doi (string, keep as-is)\n- species (e.g. "mouse", "rat", "human", "in vitro")\n- region (brain region or topic)\n- tags (array of keywords, e.g. ["single-cell atlas", "AD", "ML", "LC", "behavioral methods", "computational", "aging", "review", "connectomics"])\n- methods (key techniques, comma-separated)\n- findings (1-2 sentence summary)\n- funding (if mentioned)\n\nPapers:\n${subset.map((p, i) => `\n--- Paper ${i+1} ---\nDOI: ${p.doi || 'N/A'}\nTitle: ${p.title}\nAbstract: ${(p.abstract || 'No abstract available').substring(0, 500)}`).join('\n')}\n\nReturn ONLY a JSON array.`;
 
   document.getElementById('claudePrompt').textContent = prompt;
   document.getElementById('claudeBox').style.display = 'block';
@@ -900,7 +982,8 @@ window.applyClaudeResponse = function() {
       if (paper) {
         if (d.species && !paper.species) paper.species = d.species;
         if (d.region && !paper.region) paper.region = d.region;
-        if (d.type) paper.type = d.type;
+        if (d.tags && Array.isArray(d.tags)) paper.tags = d.tags;
+        else if (d.type) paper.tags = [d.type];
         if (d.methods && !paper.methods) paper.methods = d.methods;
         if (d.findings && !paper.findings) paper.findings = d.findings;
         if (d.funding && !paper.funding) paper.funding = d.funding;
@@ -908,7 +991,7 @@ window.applyClaudeResponse = function() {
       }
     });
 
-    save(); renderLibrary();
+    save(); renderTagFilters(); renderLibrary();
     status.style.color = 'var(--green)';
     status.textContent = `Updated ${updated} of ${data.length} papers.`;
   } catch(e) {
@@ -960,7 +1043,7 @@ document.getElementById('importFile').addEventListener('change', function(e) {
           added++;
         }
       });
-      save(); renderLibrary();
+      migrateTags(); save(); renderTagFilters(); renderLibrary();
       alert(`Imported ${added} new papers (${data.length - added} duplicates skipped).`);
     } catch(err) {
       alert('Import error: ' + err.message);
@@ -992,7 +1075,7 @@ function parseBibtex(text) {
       doi: fields.doi || '',
       abstract: fields.abstract || '',
       status: 'unread',
-      type: '',
+      tags: [],
       species: '',
       region: '',
       methods: '',
