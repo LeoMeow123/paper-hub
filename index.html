@@ -319,19 +319,30 @@ async function saveToCloud(data) {
     if (res.ok) sha = (await res.json()).sha;
   } catch {}
 
-  const content = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))));
+  // Encode content as base64 (TextEncoder handles UTF-8 correctly)
+  const jsonStr = JSON.stringify(data, null, 2);
+  const bytes = new TextEncoder().encode(jsonStr);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+  const content = btoa(binary);
+
   try {
+    const body = {
+      message: `Update papers ${new Date().toISOString().slice(0, 16)}`,
+      content,
+    };
+    if (sha) body.sha = sha;
     const res = await fetch(url, {
       method: 'PUT',
       headers,
-      body: JSON.stringify({
-        message: `Update papers ${new Date().toISOString().slice(0, 16)}`,
-        content,
-        ...(sha ? { sha } : {}),
-      }),
+      body: JSON.stringify(body),
     });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      console.error('GitHub save failed:', res.status, err);
+    }
     return res.ok;
-  } catch { return false; }
+  } catch (e) { console.error('GitHub save error:', e); return false; }
 }
 
 // =====================================================================
@@ -465,11 +476,6 @@ async function init() {
   }
 
   migrateTags();
-  // Push migrated data to sync tags format
-  if (loaded && cfg?.token) {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(papers));
-    pushToCloud();
-  }
   renderTagFilters();
   renderLibrary();
 }
