@@ -71,10 +71,13 @@
   .tag-ad-neurodegeneration{background:rgba(239,68,68,0.15);color:#ef4444}
   .tag-lc-norepinephrine{background:rgba(52,211,153,0.15);color:#34d399}
   .tag-behavioral-methods{background:rgba(251,191,36,0.15);color:#fbbf24}
+  .tag-ml{background:rgba(244,114,182,0.15);color:#f472b6}
+  .tag-connectomics{background:rgba(56,189,248,0.15);color:#38bdf8}
+  .tag-motion-tracking---robotics{background:rgba(163,230,53,0.15);color:#a3e635}
   .tag-computational{background:rgba(167,139,250,0.15);color:#a78bfa}
   .tag-aging{background:rgba(249,115,22,0.15);color:#f97316}
   .tag-review{background:rgba(148,163,184,0.15);color:#94a3b8}
-  .status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}
+  .status-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px}
   .status-read{background:var(--green)}.status-reading{background:var(--yellow)}.status-unread{background:var(--muted)}
 
   /* Paper detail / editor */
@@ -159,6 +162,7 @@
     <button class="chip" data-filter="type" data-value="computational">Computational</button>
     <button class="chip" data-filter="type" data-value="aging">Aging</button>
     <button class="chip" data-filter="type" data-value="review">Review</button>
+    <button class="chip" data-filter="type" data-value="ML">ML</button>
   </div>
   <div class="filter-row">
     <span class="filter-label">Model:</span>
@@ -175,6 +179,7 @@
     <button class="chip" data-filter="region" data-value="brain">Whole Brain</button>
     <button class="chip" data-filter="region" data-value="amygdala">Amygdala</button>
     <button class="chip" data-filter="region" data-value="entorhinal">Entorhinal</button>
+    <button class="chip" data-filter="region" data-value="hypothalamus">Hypothalamus</button>
   </div>
   <div id="libraryContent"></div>
 </div>
@@ -207,6 +212,9 @@
           <option value="computational">Computational</option>
           <option value="aging">Aging</option>
           <option value="review">Review</option>
+          <option value="ML">ML</option>
+          <option value="connectomics">Connectomics</option>
+          <option value="motion tracking / robotics">Motion Tracking / Robotics</option>
         </select>
       </div>
       <div class="form-group"><label>Methods</label><input id="f-methods" placeholder="e.g. SLEAP, optogenetics, calcium imaging"></div>
@@ -538,7 +546,7 @@ function renderLibrary() {
     <tbody>${filtered.map(p => {
       const typeClass = 'tag-' + (p.type || 'review').replace(/[\/\s]+/g, '-').toLowerCase();
       return `<tr onclick="openDetail('${p.id}')">
-        <td><span class="status-dot status-${p.status||'unread'}"></span></td>
+        <td><span class="status-dot status-${p.status||'unread'}" onclick="event.stopPropagation();toggleStatus('${p.id}')" title="Click to toggle" style="cursor:pointer"></span></td>
         <td><div class="paper-title">${esc(p.title||'Untitled')}</div><div class="paper-authors">${esc(p.authors||'')}</div></td>
         <td>${p.year||''}</td>
         <td style="font-size:11px;color:var(--muted)">${esc(p.journal||'')}${p.doi ? ' <a href="'+(p.doi.startsWith('http')?esc(p.doi):'https://doi.org/'+esc(p.doi))+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent);font-size:10px">'+(p.doi.startsWith('http')?'Link':'DOI')+'</a>' : ''}</td>
@@ -549,6 +557,16 @@ function renderLibrary() {
       </tr>`;
     }).join('')}</tbody></table>`;
 }
+
+window.toggleStatus = function(id) {
+  const p = papers.find(x => x.id === id);
+  if (!p) return;
+  const cycle = ['unread', 'reading', 'read'];
+  p.status = cycle[(cycle.indexOf(p.status || 'unread') + 1) % 3];
+  save();
+  renderLibrary();
+  renderStats();
+};
 
 window.sortBy = function(col) {
   if (sortCol === col) sortAsc = !sortAsc;
@@ -748,7 +766,7 @@ window.openDetail = function(id) {
       ${p.doi ? ' &middot; <a href="https://doi.org/'+esc(p.doi)+'" target="_blank" style="color:var(--accent)">DOI</a>' : ''}</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
       <span class="tag tag-${(p.type||'review').replace(/[\/\s]+/g, '-').toLowerCase()}">${p.type||'?'}</span>
-      <span class="status-dot status-${p.status||'unread'}"></span><span style="font-size:12px">${p.status||'unread'}</span>
+      <span class="status-dot status-${p.status||'unread'}" onclick="toggleStatus('${p.id}');openDetail('${p.id}')" style="cursor:pointer"></span><span style="font-size:12px;cursor:pointer" onclick="toggleStatus('${p.id}');openDetail('${p.id}')">${p.status||'unread'}</span>
       ${p.species ? '<span style="font-size:12px;color:var(--muted)">Model: <strong style="color:var(--text)">'+esc(p.species)+'</strong></span>' : ''}
       ${p.region ? '<span style="font-size:12px;color:var(--muted)">Region: <strong style="color:var(--text)">'+esc(p.region)+'</strong></span>' : ''}
       ${p.project ? '<span style="font-size:12px;color:var(--muted)">Project: <strong style="color:var(--text)">'+esc(p.project)+'</strong></span>' : ''}
