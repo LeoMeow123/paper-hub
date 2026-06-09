@@ -315,9 +315,17 @@ async function saveToCloud(data) {
   // Get current SHA
   let sha;
   try {
-    const res = await fetch(url, { headers });
-    if (res.ok) sha = (await res.json()).sha;
-  } catch {}
+    const res = await fetch(url, {
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github.v3+json' }
+    });
+    if (res.ok) {
+      const meta = await res.json();
+      sha = meta.sha;
+      console.log('Got SHA:', sha);
+    } else {
+      console.warn('SHA fetch failed:', res.status, await res.text());
+    }
+  } catch (e) { console.error('SHA fetch error:', e); }
 
   // Encode content as base64 (TextEncoder handles UTF-8 correctly)
   const jsonStr = JSON.stringify(data, null, 2);
