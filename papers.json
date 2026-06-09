@@ -1246,7 +1246,7 @@
     "region": "whole body",
     "type": "motion tracking / robotics",
     "methods": "physics simulation, motion capture curation, imitation learning, harmonic motion embedding",
-    "status": "unread",
+    "status": "read",
     "project": "",
     "funding": "",
     "abstract": "Introduces LIMMT, a data-centric framework for humanoid motion tracking. Defines motion data quality through three dimensions: physics feasibility, action diversity, and action complexity. Shows that training on just 3% of curated AMASS data outperforms using the full dataset.",
