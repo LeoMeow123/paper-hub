@@ -529,10 +529,10 @@ function renderLibrary() {
       <th onclick="sortBy('status')" style="width:30px">St${arrow('status')}</th>
       <th onclick="sortBy('title')">Title${arrow('title')}</th>
       <th onclick="sortBy('year')" style="width:50px">Year${arrow('year')}</th>
-      <th onclick="sortBy('journal')">Journal${arrow('journal')}</th>
-      <th onclick="sortBy('type')">Type${arrow('type')}</th>
-      <th onclick="sortBy('species')">Model${arrow('species')}</th>
-      <th onclick="sortBy('region')">Region${arrow('region')}</th>
+      <th onclick="sortBy('journal')" style="width:90px">Journal${arrow('journal')}</th>
+      <th onclick="sortBy('type')" style="width:80px">Type${arrow('type')}</th>
+      <th onclick="sortBy('species')" style="width:60px">Model${arrow('species')}</th>
+      <th onclick="sortBy('region')" style="width:80px">Region${arrow('region')}</th>
       <th>Findings</th>
     </tr></thead>
     <tbody>${filtered.map(p => {
@@ -541,11 +541,11 @@ function renderLibrary() {
         <td><span class="status-dot status-${p.status||'unread'}"></span></td>
         <td><div class="paper-title">${esc(p.title||'Untitled')}</div><div class="paper-authors">${esc(p.authors||'')}</div></td>
         <td>${p.year||''}</td>
-        <td style="font-size:12px;color:var(--muted);white-space:nowrap">${esc(p.journal||'')}${p.doi ? ' <a href="'+(p.doi.startsWith('http')?esc(p.doi):'https://doi.org/'+esc(p.doi))+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent);font-size:10px">'+(p.doi.startsWith('http')?'Link':'DOI')+'</a>' : ''}</td>
-        <td><span class="tag ${typeClass}">${p.type||'?'}</span></td>
-        <td style="font-size:12px">${esc(p.species||'')}</td>
-        <td style="font-size:12px">${esc(p.region||'')}</td>
-        <td style="font-size:11px;color:var(--muted);max-width:250px">${esc((p.findings||'').substring(0,120))}${(p.findings||'').length>120?'...':''}</td>
+        <td style="font-size:11px;color:var(--muted)">${esc(p.journal||'')}${p.doi ? ' <a href="'+(p.doi.startsWith('http')?esc(p.doi):'https://doi.org/'+esc(p.doi))+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent);font-size:10px">'+(p.doi.startsWith('http')?'Link':'DOI')+'</a>' : ''}</td>
+        <td><span class="tag ${typeClass}" style="font-size:10px;padding:2px 7px">${p.type||'?'}</span></td>
+        <td style="font-size:11px">${esc(p.species||'')}</td>
+        <td style="font-size:11px">${esc(p.region||'')}</td>
+        <td style="font-size:11px;color:var(--muted)">${esc((p.findings||'').substring(0,200))}${(p.findings||'').length>200?'...':''}</td>
       </tr>`;
     }).join('')}</tbody></table>`;
 }
