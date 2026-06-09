@@ -343,23 +343,33 @@ let sortCol = 'year', sortAsc = false;
 let activeTags = new Set();
 let currentFormTags = [];
 let _saveTimer = null;
+let _saving = false;
 
 // Save: write to localStorage immediately, debounce GitHub push
 function save() {
   localStorage.setItem(CACHE_KEY, JSON.stringify(papers));
   // Debounce cloud save (2 seconds after last edit)
   clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(async () => {
-    const cfg = getSyncConfig();
-    if (!cfg?.token) {
-      setSyncStatus('offline', 'Local only');
-      return;
-    }
-    setSyncStatus('saving', 'Saving...');
-    const ok = await saveToCloud(papers);
-    setSyncStatus(ok ? 'saved' : 'error', ok ? 'Saved' : 'Save failed');
-    if (ok) setTimeout(() => setSyncStatus('saved', 'Synced'), 2000);
-  }, 2000);
+  _saveTimer = setTimeout(() => pushToCloud(), 2000);
+}
+
+async function pushToCloud() {
+  const cfg = getSyncConfig();
+  if (!cfg?.token) {
+    setSyncStatus('offline', 'Local only');
+    return;
+  }
+  if (_saving) { // retry after current save finishes
+    clearTimeout(_saveTimer);
+    _saveTimer = setTimeout(() => pushToCloud(), 3000);
+    return;
+  }
+  _saving = true;
+  setSyncStatus('saving', 'Saving...');
+  const ok = await saveToCloud(papers);
+  _saving = false;
+  setSyncStatus(ok ? 'saved' : 'error', ok ? 'Saved' : 'Save failed');
+  if (ok) setTimeout(() => setSyncStatus('saved', 'Synced'), 2000);
 }
 
 // =====================================================================
@@ -455,6 +465,11 @@ async function init() {
   }
 
   migrateTags();
+  // Push migrated data to sync tags format
+  if (loaded && cfg?.token) {
+    localStorage.setItem(CACHE_KEY, JSON.stringify(papers));
+    pushToCloud();
+  }
   renderTagFilters();
   renderLibrary();
 }
