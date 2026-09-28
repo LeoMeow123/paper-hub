@@ -1,5 +1,34 @@
 [
   {
+    "id": "paller-2017-tmr-sleep",
+    "title": "Sleeping in a Brave New World: Opportunities for Improving Learning and Clinical Outcomes Through Targeted Memory Reactivation",
+    "authors": "Paller, K.A.",
+    "year": "2017",
+    "journal": "Current Directions in Psychological Science",
+    "doi": "10.1177/0963721417716928",
+    "species": "human",
+    "region": "sleep, memory consolidation",
+    "tags": [
+      "journal club",
+      "sleep",
+      "memory",
+      "review"
+    ],
+    "methods": "targeted memory reactivation (TMR), auditory cueing during slow-wave sleep, closed-loop acoustic stimulation of slow oscillations, review",
+    "status": "unread",
+    "project": "",
+    "funding": "",
+    "abstract": "Neuroscientific insights into learning and memory have mostly concerned input and output, but intervening processing during the time between acquisition and retrieval is also critical. Intervening memory reactivation may regulate memory longevity, and a growing body of evidence implicates sleep in changing memory storage. Subtle auditory stimulation can be used experimentally to selectively encourage memory reactivation during sleep, which thereby improves learning. This methodology for modifying memory storage during sleep offers new opportunities for reinforcing learning to enhance clinical outcomes in conjunction with therapies engaged during waking. Brain rhythms can also be entrained to enhance sleep functions, facilitating progress in understanding the neurophysiological basis of memory processing during sleep.",
+    "findings": "Short review arguing that memory consolidation happens in the interval between learning and recall, largely during sleep. Playing sounds paired with learned material during slow-wave sleep (targeted memory reactivation, TMR) selectively strengthens those memories without waking the sleeper. Proposes TMR and acoustic entrainment of slow oscillations as tools to reinforce waking therapies (e.g. bias reduction, skill learning, clinical rehabilitation), while noting the mechanisms and limits are still open.",
+    "notes": "Journal club paper. Current Directions 26(6):532-537. Good entry point to the TMR literature; check Hu et al. 2020 Psych Bull meta-analysis for effect sizes.",
+    "journalClub": {
+      "date": "",
+      "presenter": "",
+      "discussion": ""
+    },
+    "added": "2026-09-28"
+  },
+  {
     "id": "sea-ad-2024",
     "title": "Integrated multimodal cell atlas of Alzheimer's disease",
     "authors": "SEA-AD Consortium",
@@ -8,7 +37,6 @@
     "doi": "10.1038/s41593-024-01774-5",
     "species": "human",
     "region": "brain (multi-region)",
-    "type": "AD/neurodegeneration",
     "methods": "RNA-seq, ATAC-seq, MERFISH, multimodal integration",
     "status": "unread",
     "project": "AD-LC",
@@ -18,7 +46,8 @@
     "notes": "Key reference: 84 donors, multimodal approach",
     "tags": [
       "AD/neurodegeneration"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "mathys-2024-multiregion",
@@ -29,7 +58,6 @@
     "doi": "10.1038/s41586-024-07606-7",
     "species": "human",
     "region": "brain (6 regions)",
-    "type": "AD/neurodegeneration",
     "methods": "snRNA-seq, multi-region profiling",
     "status": "unread",
     "project": "AD-LC",
@@ -39,7 +67,8 @@
     "notes": "6-region AD study, regional vulnerability",
     "tags": [
       "AD/neurodegeneration"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "mathys-2023-resilience",
@@ -50,7 +79,6 @@
     "doi": "10.1016/j.cell.2023.08.039",
     "species": "human",
     "region": "brain",
-    "type": "single-cell atlas",
     "methods": "snRNA-seq",
     "status": "unread",
     "project": "AD-LC",
@@ -60,7 +88,8 @@
     "notes": "Large-scale AD, biomarkers, resilience",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "yao-2023-mouse-brain",
@@ -71,7 +100,6 @@
     "doi": "10.1038/s41586-023-06812-z",
     "species": "mouse",
     "region": "whole brain",
-    "type": "single-cell atlas",
     "methods": "scRNA-seq, MERFISH",
     "status": "unread",
     "project": "AD-LC",
@@ -81,7 +109,8 @@
     "notes": "Mouse reference atlas",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "yang-2023-atac",
@@ -92,7 +121,6 @@
     "doi": "10.1126/science.adf7044",
     "species": "human",
     "region": "brain (42 regions)",
-    "type": "single-cell atlas",
     "methods": "snATAC-seq",
     "status": "unread",
     "project": "AD-LC",
@@ -102,7 +130,8 @@
     "notes": "ATAC-seq methodology, regulatory elements",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "mathys-2019-early-ad",
@@ -113,7 +142,6 @@
     "doi": "10.1038/s41586-019-1195-2",
     "species": "human",
     "region": "prefrontal cortex",
-    "type": "AD/neurodegeneration",
     "methods": "snRNA-seq",
     "status": "unread",
     "project": "AD-LC",
@@ -123,7 +151,8 @@
     "notes": "Early AD atlas, prefrontal cortex",
     "tags": [
       "AD/neurodegeneration"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "siletti-2023-human-brain",
@@ -134,7 +163,6 @@
     "doi": "10.1126/science.add7046",
     "species": "human",
     "region": "whole brain (~100 regions)",
-    "type": "single-cell atlas",
     "methods": "snRNA-seq",
     "status": "unread",
     "project": "AD-LC",
@@ -144,7 +172,8 @@
     "notes": "Whole human brain atlas",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "lamanno-2021-developing",
@@ -155,7 +184,6 @@
     "doi": "10.1038/s41586-021-03775-x",
     "species": "mouse",
     "region": "whole brain (developmental)",
-    "type": "single-cell atlas",
     "methods": "scRNA-seq",
     "status": "unread",
     "project": "AD-LC",
@@ -165,7 +193,8 @@
     "notes": "Developmental atlas",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "braincell-2024-meta",
@@ -176,7 +205,6 @@
     "doi": "10.1038/s41591-024-03150-z",
     "species": "human",
     "region": "brain (meta-analysis)",
-    "type": "single-cell atlas",
     "methods": "Meta-analysis, data integration",
     "status": "unread",
     "project": "AD-LC",
@@ -186,7 +214,8 @@
     "notes": "Meta-analysis, integration resource",
     "tags": [
       "single-cell atlas"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "aid-ad-website",
@@ -197,7 +226,6 @@
     "doi": "https://www.aid-ad.org/",
     "species": "human",
     "region": "brain (AD)",
-    "type": "AD/neurodegeneration",
     "methods": "",
     "status": "unread",
     "project": "AD-LC",
@@ -207,18 +235,18 @@
     "notes": "Consortium website: https://www.aid-ad.org/ URL: https://www.aid-ad.org/",
     "tags": [
       "AD/neurodegeneration"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "sciencedirect-2024-lc",
     "title": "Altered Lateral Prefrontal Cortex Functioning During Emotional Interference Resistance",
     "authors": "Ojha, A; Jones, N; Henry, T; Versace, A",
     "year": "2024",
-    "journal": "Biological Psychiatry: CNNI",
+    "journal": "Biological Psychiatry: Cognitive Neuroscience and Neuroimaging",
     "doi": "10.1016/j.bpsc.2024.02.003",
     "species": "human",
-    "region": "PFC",
-    "type": "behavioral methods",
+    "region": "prefrontal cortex",
     "methods": "fMRI",
     "status": "unread",
     "project": "AD-LC",
@@ -228,7 +256,8 @@
     "notes": "URL: https://www.sciencedirect.com/science/article/pii/S2451902224002003 — needs DOI lookup to fill",
     "tags": [
       "behavioral methods"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "scitranslmed-aay6931",
@@ -239,7 +268,6 @@
     "doi": "10.1126/scitranslmed.aay6931",
     "species": "mouse",
     "region": "LC",
-    "type": "LC/norepinephrine",
     "methods": "pharmacology, biochemistry",
     "status": "unread",
     "project": "AD-LC",
@@ -249,7 +277,8 @@
     "notes": "Needs metadata fill via DOI lookup",
     "tags": [
       "LC/norepinephrine"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "scitranslmed-adg3665",
@@ -260,7 +289,6 @@
     "doi": "10.1126/scitranslmed.adg3665",
     "species": "mouse, human",
     "region": "LC, motor cortex, brainstem, spinal cord",
-    "type": "LC/norepinephrine",
     "methods": "electrophysiology, pharmacology",
     "status": "unread",
     "project": "AD-LC",
@@ -270,7 +298,8 @@
     "notes": "Needs metadata fill via DOI lookup",
     "tags": [
       "LC/norepinephrine"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "nature-2025-62500",
@@ -281,7 +310,6 @@
     "doi": "10.1038/s41467-025-62500-8",
     "species": "mouse, human",
     "region": "LC, olfactory",
-    "type": "LC/norepinephrine",
     "methods": "immunohistochemistry, behavioral testing",
     "status": "unread",
     "project": "AD-LC",
@@ -291,7 +319,8 @@
     "notes": "Needs metadata fill via DOI lookup",
     "tags": [
       "LC/norepinephrine"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "pdf-org-lc-ne",
@@ -302,7 +331,6 @@
     "doi": "10.1016/j.cub.2015.09.039",
     "species": "mouse, rat",
     "region": "LC",
-    "type": "review",
     "methods": "",
     "status": "unread",
     "project": "AD-LC",
@@ -312,7 +340,8 @@
     "notes": "PDF on local machine — needs DOI lookup by title",
     "tags": [
       "review"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "pdf-lc-microglia",
@@ -323,7 +352,6 @@
     "doi": "10.1073/pnas.0909586107",
     "species": "mouse",
     "region": "LC",
-    "type": "LC/norepinephrine",
     "methods": "immunohistochemistry, microglia analysis",
     "status": "unread",
     "project": "AD-LC",
@@ -333,7 +361,8 @@
     "notes": "PDF on local machine — LC-microglia-NE-AD connection",
     "tags": [
       "LC/norepinephrine"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "pdf-gpt2-lc",
@@ -344,7 +373,6 @@
     "doi": "10.1016/j.nbd.2022.105831",
     "species": "mouse",
     "region": "LC",
-    "type": "LC/norepinephrine",
     "methods": "genetics, histology",
     "status": "unread",
     "project": "AD-LC",
@@ -354,7 +382,8 @@
     "notes": "PDF on local machine — mitochondrial dysfunction in LC",
     "tags": [
       "LC/norepinephrine"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "pdf-mito-neuro",
@@ -365,7 +394,6 @@
     "doi": "10.14336/ad.2019.1125",
     "species": "human",
     "region": "brain",
-    "type": "review",
     "methods": "",
     "status": "unread",
     "project": "AD-LC",
@@ -375,7 +403,8 @@
     "notes": "PDF on local machine — mito-neurotransmission connection in AD",
     "tags": [
       "review"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "pdf-ad-electroceutical",
@@ -386,7 +415,6 @@
     "doi": "10.1002/ctm2.397",
     "species": "human",
     "region": "LC",
-    "type": "review",
     "methods": "electroceutical therapies",
     "status": "unread",
     "project": "AD-LC",
@@ -396,18 +424,18 @@
     "notes": "PDF on local machine — NE involvement in AD + electroceutical therapies",
     "tags": [
       "review"
-    ]
+    ],
+    "added": "2026-06-09"
   },
   {
     "id": "high-quality--high-throughput",
     "title": "High quality, high throughput, and low-cost simultaneous video recording of 60 animals in operant chambers using PiRATeMC",
     "authors": "Ramborger, Jarryd; Kalra, Sumay; Mosquera, Joseph; Smith, Alexander C W; George, Olivier",
     "year": "2024",
-    "journal": "J. Neurosci. Methods",
+    "journal": "Journal of Neuroscience Methods",
     "doi": "10.1101/2023.11.13.566747",
     "species": "rat",
     "region": "",
-    "type": "behavioral methods",
     "methods": "Raspberry Pi, video recording",
     "status": "unread",
     "project": "",
@@ -425,11 +453,10 @@
     "title": "Single-nucleus genomics in outbred rats with divergent cocaine addiction-like behaviors reveals changes in amygdala GABAergic",
     "authors": "Zhou, Jessica L; de Guglielmo, Giordano; Ho, Aaron J; Kallupi, Marsida; Pokhrel, Narayan; Li, Hai-Ri; Chitre, Apurva S; Munro, Daniel; Mohammadi, Pejman; Carrette, Lieselot L G; George, Olivier; Palme",
     "year": "2023",
-    "journal": "Nat. Neurosci.",
+    "journal": "Nature Neuroscience",
     "doi": "10.1038/s41593-023-01489-z",
     "species": "rat",
     "region": "amygdala",
-    "type": "single-cell atlas",
     "methods": "snRNA-seq, snATAC-seq, electrophysiology",
     "status": "unread",
     "project": "",
@@ -451,7 +478,6 @@
     "doi": "10.1101/2025.07.16.665231",
     "species": "human",
     "region": "whole genome",
-    "type": "computational",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -469,11 +495,10 @@
     "title": "An integrated single-nucleus and spatial transcriptomics atlas reveals the molecular landscape of the human hippocampus",
     "authors": "Thompson, Jacqueline R; Nelson, Erik D; Tippani, Madhavi; Ramnauth, Anthony D; Divecha, Heena R; Miller, Ryan A; Eagles, Nicholas J; Pattie, Elizabeth A; Kwon, Sang Ho; Bach, Svitlana V; Kaipa, Uma M;",
     "year": "2025",
-    "journal": "Nat. Neurosci.",
+    "journal": "Nature Neuroscience",
     "doi": "10.1101/2024.04.26.590643",
     "species": "human",
     "region": "hippocampus",
-    "type": "single-cell atlas",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -495,7 +520,6 @@
     "doi": "10.1101/2023.11.07.566050",
     "species": "human",
     "region": "prefrontal cortex",
-    "type": "aging",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -513,11 +537,10 @@
     "title": "A machine learning tool with light-based image analysis for automatic classification of 3D pain behaviors",
     "authors": "Barkai, Omer; Zhang, Biyao; Turnes, Bruna Lenfers; Arab, Maryam; Yarmolinsky, David A; Zhang, Zihe; Barrett, Lee B; Woolf, Clifford J",
     "year": "2025",
-    "journal": "Cell Rep. Methods",
+    "journal": "Cell Reports Methods",
     "doi": "10.1101/2024.12.01.625907",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "machine learning, image analysis",
     "status": "unread",
     "project": "",
@@ -535,11 +558,10 @@
     "title": "Profiling mouse behavior with computational tools to assess age-dependent differences in associative learning",
     "authors": "Canela-Grimau, Marc; Pinho, Julia S; Busquets-Garcia, Arnau",
     "year": "2025",
-    "journal": "Cell Rep. Methods",
+    "journal": "Cell Reports Methods",
     "doi": "10.1016/j.crmeth.2025.101144",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "computational behavior analysis",
     "status": "unread",
     "project": "",
@@ -557,11 +579,10 @@
     "title": "An integrative assay for measuring social aversion and motivation in freely behaving mice",
     "authors": "Grammer, Jordan; Valles, Rene; Bowles, Alexis; Zelikowsky, Moriel",
     "year": "2025",
-    "journal": "Cell Rep. Methods",
+    "journal": "Cell Reports Methods",
     "doi": "10.1016/j.crmeth.2025.101108",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "behavioral assay",
     "status": "unread",
     "project": "",
@@ -579,11 +600,10 @@
     "title": "Continuous monitoring and machine vision reveals that developing gerbils exhibit structured social behaviors prior to the emergence of autonomy",
     "authors": "Mitelut, Catalin; Diez Castro, Marielisa; Peterson, Ralph E; Gonçalves, Maria; Li, Jennifer; Gamer, Madeline; Nilsson, Simon Ro; Pereira, Talmo D; Sanes, Dan H",
     "year": "2025",
-    "journal": "PLoS Biol.",
+    "journal": "PLOS Biology",
     "doi": "10.1371/journal.pbio.3003348",
     "species": "gerbil",
     "region": "",
-    "type": "behavioral methods",
     "methods": "machine vision, continuous monitoring",
     "status": "unread",
     "project": "",
@@ -601,11 +621,10 @@
     "title": "Flexible inference of learning rules from de novo learning data using neural networks",
     "authors": "Liu, Yuhan Helena; Geadah, Victor; Pillow, Jonathan",
     "year": "2025",
-    "journal": "arXiv [cs.LG]",
+    "journal": "arXiv",
     "doi": "10.48550/arXiv.2502.01467",
     "species": "human, rat",
     "region": "",
-    "type": "computational",
     "methods": "neural networks, learning rules",
     "status": "unread",
     "project": "",
@@ -623,11 +642,10 @@
     "title": "RIPES: A robust multi-rodent pose estimation framework integrating instance segmentation and biometric features",
     "authors": "Liu, Bingbin; Qian, Yuxuan; Wang, Jianxin",
     "year": "2025",
-    "journal": "Tsinghua Sci. Technol.",
+    "journal": "Tsinghua Science and Technology",
     "doi": "10.26599/tst.2025.9010109",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "SLEAP, pose estimation, instance segmentation",
     "status": "unread",
     "project": "",
@@ -645,11 +663,10 @@
     "title": "Diffusion-based action recognition generalizes to untrained domains",
     "authors": "Guimaraes, Rogerio; Xiao, Frank; Perona, Pietro; Marks, Markus",
     "year": "2025",
-    "journal": "arXiv [cs.CV]",
+    "journal": "arXiv",
     "doi": "10.48550/arXiv.2501.17418",
     "species": "multi-species",
     "region": "",
-    "type": "behavioral methods",
     "methods": "diffusion models, action recognition",
     "status": "unread",
     "project": "",
@@ -667,11 +684,10 @@
     "title": "Geometric neural distance fields for learning human motion priors",
     "authors": "Yu, Zhengdi; Foti, Simone; Zhang, Linguang; Zhao, Amy; Keskin, Cem; Zafeiriou, Stefanos; Birdal, Tolga",
     "year": "2025",
-    "journal": "arXiv [cs.CV]",
+    "journal": "arXiv",
     "doi": "10.48550/arXiv.2503.03122",
     "species": "human",
     "region": "",
-    "type": "behavioral methods",
     "methods": "3D motion estimation, neural fields",
     "status": "unread",
     "project": "",
@@ -689,11 +705,10 @@
     "title": "Data-driven modelling of neurodegenerative disease progression: thinking outside the black box",
     "authors": "Young, Alexandra L; Oxtoby, Neil P; Garbarino, Sara; Fox, Nick C; Barkhof, Frederik; Schott, Jonathan M; Alexander, Daniel C",
     "year": "2024",
-    "journal": "Nat. Rev. Neurosci.",
+    "journal": "Nature Reviews Neuroscience",
     "doi": "10.1038/s41583-023-00779-6",
     "species": "human",
     "region": "brain",
-    "type": "review",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -711,11 +726,10 @@
     "title": "Single-nucleus transcriptome analysis reveals dysregulation of angiogenic endothelial cells and neuroprotective glia in Alzheimer's disease",
     "authors": "Lau, Shun-Fat; Cao, Han; Fu, Amy K Y; Ip, Nancy Y",
     "year": "2020",
-    "journal": "Proc. Natl. Acad. Sci. U. S. A.",
+    "journal": "PNAS",
     "doi": "10.1038/s41593-020-00764-7",
     "species": "human",
-    "region": "PFC, cortex",
-    "type": "AD/neurodegeneration",
+    "region": "prefrontal cortex, cortex",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -733,11 +747,10 @@
     "title": "Human and mouse single-nucleus transcriptomics reveal TREM2-dependent and TREM2-independent cellular responses in Alzheimer's disease",
     "authors": "Zhou, Yingyue; Song, Wilbur M; Andhey, Prabhakar S; Swain, Amanda; Levy, Tyler; Miller, Kelly R; Poliani, Pietro L; Cominelli, Manuela; Grover, Shikha; Gilfillan, Susan; Cella, Marina; Ulland, Tyler K",
     "year": "2020",
-    "journal": "Nat. Med.",
+    "journal": "Nature Medicine",
     "doi": "10.3410/f.737202274.793589781",
     "species": "mouse, human",
     "region": "cortex",
-    "type": "AD/neurodegeneration",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -759,7 +772,6 @@
     "doi": "https://github.com/ayodejimb/Geometric_Deep_Behavioral_Analysis",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "geometric deep learning, behavioral analysis",
     "status": "unread",
     "project": "",
@@ -781,7 +793,6 @@
     "doi": "10.1109/fg61629.2025.11099128",
     "species": "mouse",
     "region": "behavioral phenotyping",
-    "type": "behavioral methods",
     "methods": "geometric deep learning, pose estimation, SLEAP",
     "status": "unread",
     "project": "",
@@ -803,7 +814,6 @@
     "doi": "10.1038/s41586-023-06810-1",
     "species": "mouse",
     "region": "whole brain",
-    "type": "behavioral methods",
     "methods": "Neuropixels, electrophysiology",
     "status": "unread",
     "project": "",
@@ -825,7 +835,6 @@
     "doi": "10.1101/2024.12.09.627436",
     "species": "human, mouse",
     "region": "brain",
-    "type": "AD/neurodegeneration",
     "methods": "combination therapy, cell-type targeting",
     "status": "unread",
     "project": "",
@@ -847,7 +856,6 @@
     "doi": "10.1101/2024.02.18.580913",
     "species": "human",
     "region": "prefrontal cortex",
-    "type": "single-cell atlas",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -865,11 +873,10 @@
     "title": "Modeling Alzheimer's disease with iPSC-derived brain cells (health vs AD)",
     "authors": "Penney, Jay; Ralvenius, William T; Tsai, Li-Huei",
     "year": "2020",
-    "journal": "Mol. Psychiatry",
+    "journal": "Molecular Psychiatry",
     "doi": "10.1038/s41380-019-0468-3",
     "species": "human, iPSC, rat, rodent",
     "region": "brain",
-    "type": "review",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -891,7 +898,6 @@
     "doi": "10.1038/s41586-024-07871-6",
     "species": "human",
     "region": "prefrontal cortex",
-    "type": "aging",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -913,7 +919,6 @@
     "doi": "10.1101/2024.03.01.583001",
     "species": "mouse",
     "region": "multi-organ",
-    "type": "aging",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -935,7 +940,6 @@
     "doi": "10.1038/s41586-024-08334-8",
     "species": "mouse",
     "region": "brain",
-    "type": "computational",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -957,7 +961,6 @@
     "doi": "10.1038/s41586-023-06802-1",
     "species": "human",
     "region": "multi-organ",
-    "type": "aging",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -975,11 +978,10 @@
     "title": "Amyloid-associated hyperconnectivity drives tau spread across connected brain regions in Alzheimer’s disease",
     "authors": "Roemer-Cassiano, Sebastian N; Wagner, Fabian; Evangelista, Lisa; Rauchmann, Boris-Stephan; Dehsarvi, Amir; Steward, Anna; Dewenter, Anna; Biel, Davina; Zhu, Zeyu; Pescoller, Julia; Gross, Mattes; Pern",
     "year": "2025",
-    "journal": "Sci. Transl. Med.",
+    "journal": "Science Translational Medicine",
     "doi": "10.1126/scitranslmed.adp2564",
     "species": "human",
     "region": "brain (connectivity)",
-    "type": "AD/neurodegeneration",
     "methods": "neuroimaging, connectivity analysis",
     "status": "unread",
     "project": "",
@@ -997,11 +999,10 @@
     "title": "Chronic obstructive pulmonary disease",
     "authors": "Barnes, Peter J; Burney, Peter G J; Silverman, Edwin K; Celli, Bartolome R; Vestbo, Jørgen; Wedzicha, Jadwiga A; Wouters, Emiel F M",
     "year": "2022",
-    "journal": "Nat. Rev. Dis. Primers",
+    "journal": "Nature Reviews Disease Primers",
     "doi": "10.1201/b13274-11",
     "species": "human",
     "region": "pulmonary",
-    "type": "review",
     "methods": "",
     "status": "unread",
     "project": "",
@@ -1019,11 +1020,10 @@
     "title": "Single-nucleus chromatin accessibility and transcriptomic characterization of Alzheimer's disease",
     "authors": "Morabito, Samuel; Miyoshi, Emily; Michael, Neethu; Shahin, Saba; Martini, Alessandra Cadete; Head, Elizabeth; Silva, Justine; Leavy, Kelsey; Perez-Rosendahl, Mari; Swarup, Vivek",
     "year": "2021",
-    "journal": "Nat. Genet.",
+    "journal": "Nature Genetics",
     "doi": "10.3410/f.740439876.793587724",
     "species": "human",
     "region": "brain",
-    "type": "AD/neurodegeneration",
     "methods": "snATAC-seq, snRNA-seq",
     "status": "unread",
     "project": "",
@@ -1041,11 +1041,10 @@
     "title": "Enhancer variants associated with Alzheimer's disease affect gene expression via chromatin looping",
     "authors": "Kikuchi, Masataka; Hara, Norikazu; Hasegawa, Mai; Miyashita, Akinori; Kuwano, Ryozo; Ikeuchi, Takeshi; Nakaya, Akihiro",
     "year": "2019",
-    "journal": "BMC Med. Genomics",
+    "journal": "BMC Medical Genomics",
     "doi": "10.1101/426312",
     "species": "human",
     "region": "brain",
-    "type": "AD/neurodegeneration",
     "methods": "GWAS, enhancer analysis",
     "status": "unread",
     "project": "",
@@ -1063,11 +1062,10 @@
     "title": "A single-cell atlas of entorhinal cortex from individuals with Alzheimer's disease reveals cell-type-specific gene expression regulation",
     "authors": "Grubman, Alexandra; Chew, Gabriel; Ouyang, John F; Sun, Guizhi; Choo, Xin Yi; McLean, Catriona; Simmons, Rebecca K; Buckberry, Sam; Vargas-Landin, Dulce B; Poppe, Daniel; Pflueger, Jahnvi; Lister, Rya",
     "year": "2019",
-    "journal": "Nat. Neurosci.",
+    "journal": "Nature Neuroscience",
     "doi": "10.1038/s41593-019-0539-4",
     "species": "human",
     "region": "entorhinal cortex",
-    "type": "AD/neurodegeneration",
     "methods": "snRNA-seq",
     "status": "unread",
     "project": "",
@@ -1089,7 +1087,6 @@
     "doi": "10.1038/s41586-024-07239-w",
     "species": "human",
     "region": "cortex",
-    "type": "aging",
     "methods": "multi-omics, single-cell",
     "status": "unread",
     "project": "",
@@ -1111,7 +1108,6 @@
     "doi": "10.7554/elife.80100.sa0",
     "species": "mouse",
     "region": "LC",
-    "type": "LC/norepinephrine",
     "methods": "single-cell, circuit tracing",
     "status": "unread",
     "project": "",
@@ -1133,7 +1129,6 @@
     "doi": "10.7554/elife.84628.1.sa3",
     "species": "human",
     "region": "LC",
-    "type": "LC/norepinephrine",
     "methods": "snRNA-seq, spatial transcriptomics",
     "status": "unread",
     "project": "",
@@ -1155,7 +1150,6 @@
     "doi": "10.3389/fnbeh.2020.00083",
     "species": "mouse",
     "region": "",
-    "type": "behavioral methods",
     "methods": "VideoFreeze, acoustic startle, PPI, video analysis",
     "status": "unread",
     "project": "",
@@ -1177,7 +1171,6 @@
     "doi": "10.1101/2025.02.27.640494",
     "species": "multi-species (27 organisms)",
     "region": "75 tissues",
-    "type": "computational",
     "methods": "AI curation, scRNA-seq, 10x Genomics, SRA mining",
     "status": "unread",
     "project": "",
@@ -1199,7 +1192,6 @@
     "doi": "10.1101/2025.02.20.639398",
     "species": "human (cancer cell lines)",
     "region": "50 cancer cell lines",
-    "type": "single-cell atlas",
     "methods": "scRNA-seq, perturbation atlas, Mosaic platform, cell villages",
     "status": "unread",
     "project": "",
@@ -1221,7 +1213,6 @@
     "doi": "10.1038/s41586-026-10735-w",
     "species": "Drosophila",
     "region": "brain + ventral nerve cord",
-    "type": "connectomics",
     "methods": "electron microscopy, connectome reconstruction, circuit analysis",
     "status": "read",
     "project": "",
@@ -1244,7 +1235,6 @@
     "doi": "",
     "species": "human",
     "region": "whole body",
-    "type": "motion tracking / robotics",
     "methods": "physics simulation, motion capture curation, imitation learning, harmonic motion embedding",
     "status": "read",
     "project": "",
@@ -1267,7 +1257,11 @@
     "doi": "10.1038/s41586-026-10542-3",
     "species": "mouse, human, multi-mammalian",
     "region": "multi-tissue",
-    "tags": ["aging", "transcriptomics", "cross-species"],
+    "tags": [
+      "aging",
+      "transcriptomics",
+      "cross-species"
+    ],
     "methods": "bulk RNA-seq meta-analysis, cross-species transcriptomic comparison",
     "status": "unread",
     "project": "",
@@ -1286,7 +1280,12 @@
     "doi": "10.1002/advs.202506109",
     "species": "human",
     "region": "brain",
-    "tags": ["aging", "single-cell", "transcriptomics", "aging clocks"],
+    "tags": [
+      "aging",
+      "single-cell",
+      "transcriptomics",
+      "aging clocks"
+    ],
     "methods": "snRNA-seq, cell-type-specific aging clock construction",
     "status": "unread",
     "project": "",
@@ -1305,7 +1304,12 @@
     "doi": "10.1101/2025.04.21.649585",
     "species": "mouse",
     "region": "brain (8 regions)",
-    "tags": ["aging", "single-cell", "epigenomics", "chromatin"],
+    "tags": [
+      "aging",
+      "single-cell",
+      "epigenomics",
+      "chromatin"
+    ],
     "methods": "single-cell multi-omics (ATAC-seq + RNA-seq), 8 brain regions, ages 2/9/18 months",
     "status": "unread",
     "project": "",
@@ -1324,7 +1328,12 @@
     "doi": "10.1038/s43587-022-00335-4",
     "species": "mouse",
     "region": "brain (neurogenic regions: SVZ, hippocampus)",
-    "tags": ["aging", "single-cell", "aging clocks", "rejuvenation"],
+    "tags": [
+      "aging",
+      "single-cell",
+      "aging clocks",
+      "rejuvenation"
+    ],
     "methods": "scRNA-seq, transcriptomic aging clocks, heterochronic parabiosis, exercise intervention",
     "status": "unread",
     "project": "",
@@ -1343,7 +1352,13 @@
     "doi": "10.1038/s43587-023-00462-6",
     "species": "multi-mammalian (185 species)",
     "region": "multi-tissue",
-    "tags": ["aging", "epigenomics", "aging clocks", "DNA methylation", "cross-species"],
+    "tags": [
+      "aging",
+      "epigenomics",
+      "aging clocks",
+      "DNA methylation",
+      "cross-species"
+    ],
     "methods": "DNA methylation arrays, 11,700+ tissue samples, 185 mammalian species, universal epigenetic clock construction",
     "status": "unread",
     "project": "",
@@ -1358,11 +1373,16 @@
     "title": "Ageing transcriptome meta-analysis reveals similarities and differences between key mammalian tissues",
     "authors": "Palmer, D.; Fabris, F.; Doherty, A.; Freitas, A.A.; de Magalhães, J.P.",
     "year": "2021",
-    "journal": "Aging (Albany NY)",
+    "journal": "Aging",
     "doi": "10.18632/aging.202648",
     "species": "human, mouse, rat",
     "region": "multi-tissue (brain, heart, muscle)",
-    "tags": ["aging", "transcriptomics", "meta-analysis", "cross-species"],
+    "tags": [
+      "aging",
+      "transcriptomics",
+      "meta-analysis",
+      "cross-species"
+    ],
     "methods": "meta-analysis of 127 gene expression datasets across humans, mice, and rats",
     "status": "unread",
     "project": "",

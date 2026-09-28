@@ -6,17 +6,19 @@
 <title>Paper Hub</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap');
-  :root{--bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e2a;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--text:#e8eaf0;--muted:#7a7f94;--accent:#4f9cf9;--green:#34d399;--yellow:#fbbf24;--red:#ef4444;--purple:#a78bfa}
+  :root{--bg:#0d0f14;--bg2:#13161e;--bg3:#1a1e2a;--bg4:#222638;--border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.14);--text:#e8eaf0;--text2:#b7bccb;--muted:#7a7f94;--accent:#4f9cf9;--green:#34d399;--yellow:#fbbf24;--red:#ef4444;--purple:#a78bfa;--pink:#f472b6}
   *{margin:0;padding:0;box-sizing:border-box}
-  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+  html{scroll-behavior:smooth}
+  body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.45}
+  button{font-family:inherit}
+  a{color:var(--accent)}
 
   /* Header */
-  header{padding:16px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-  header h1{font-size:20px;font-weight:700;display:flex;align-items:center;gap:10px}
-  header h1 span{font-size:22px}
-  .header-actions{display:flex;gap:8px;align-items:center}
+  header{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  header h1{font-size:19px;font-weight:700;display:flex;align-items:center;gap:10px}
+  header h1 span{font-size:21px}
+  .header-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 
-  /* Sync status */
   .sync-status{font-size:11px;padding:4px 10px;border-radius:12px;font-weight:500}
   .sync-status.saved{color:var(--green);background:rgba(52,211,153,0.1)}
   .sync-status.saving{color:var(--yellow);background:rgba(251,191,36,0.1)}
@@ -24,106 +26,182 @@
   .sync-status.offline{color:var(--muted);background:rgba(122,127,148,0.1)}
 
   /* Buttons */
-  .btn{padding:8px 18px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px}
+  .btn{padding:8px 16px;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.15s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
   .btn-primary{background:var(--accent);color:#000}
   .btn-primary:hover{opacity:0.85}
   .btn-secondary{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
-  .btn-secondary:hover{background:#222638}
+  .btn-secondary:hover{background:var(--bg4)}
   .btn-danger{background:var(--bg3);color:var(--red);border:1px solid var(--border2)}
   .btn-danger:hover{background:#1a1015}
-  .btn-sm{padding:5px 12px;font-size:11px;border-radius:6px}
+  .btn-sm{padding:5px 11px;font-size:11px;border-radius:6px}
   .btn-icon{padding:5px 8px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px}
   .btn-icon:hover{color:var(--text)}
+  .btn:focus-visible,.chip:focus-visible,.row:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 
   /* Tabs */
-  .tabs{display:flex;gap:2px;padding:10px 28px 0;border-bottom:1px solid var(--border)}
-  .tab{padding:8px 18px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;background:transparent;font-family:'Outfit',sans-serif;transition:all 0.2s}
+  .tabs{display:flex;gap:2px;padding:10px 28px 0;border-bottom:1px solid var(--border);overflow-x:auto}
+  .tab{padding:8px 16px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-radius:8px 8px 0 0;border:1px solid transparent;border-bottom:none;background:transparent;transition:all 0.2s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
   .tab:hover{color:var(--text)}.tab.active{color:var(--text);background:var(--bg2);border-color:var(--border);margin-bottom:-1px;z-index:1}
+  .tab .count{font-size:10px;font-family:'DM Mono',monospace;color:var(--muted);background:var(--bg3);padding:1px 6px;border-radius:8px}
 
   /* Panels */
   .panel{display:none;padding:20px 28px}.panel.active{display:block}
 
-  /* Search bar */
-  .search-bar{display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-  .search-input{flex:1;min-width:200px;padding:10px 14px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:14px;font-family:'Outfit',sans-serif;outline:none}
-  .search-input:focus{border-color:var(--accent)}
-  .search-input::placeholder{color:var(--muted)}
+  /* Inputs */
+  .input{padding:9px 12px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;color:var(--text);font-size:13px;font-family:inherit;outline:none;width:100%}
+  .input:focus{border-color:var(--accent)}
+  .input::placeholder{color:var(--muted)}
+  select.input{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),linear-gradient(135deg,var(--muted) 50%,transparent 50%);background-position:calc(100% - 15px) 55%,calc(100% - 10px) 55%;background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:28px}
 
-  /* Filter chips */
-  .filter-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;align-items:center}
-  .filter-label{font-size:11px;color:var(--muted);margin-right:4px}
-  .chip{padding:4px 12px;border-radius:16px;border:1px solid var(--border2);background:var(--bg3);color:var(--muted);font-size:11px;font-weight:500;cursor:pointer;font-family:'Outfit',sans-serif;transition:all 0.15s}
-  .chip:hover{color:var(--text);border-color:var(--accent)}
-  .chip.active{color:var(--accent);border-color:var(--accent);background:rgba(79,156,249,0.1)}
+  /* Stats */
+  .stats-row{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;min-width:120px;flex:1;max-width:200px}
+  .stat-val{font-size:22px;font-weight:700;font-family:'DM Mono',monospace;line-height:1.1}
+  .stat-label{font-size:11px;color:var(--muted);margin-top:4px}
 
-  /* Paper table */
-  .paper-table{width:100%;border-collapse:collapse;font-size:13px}
-  .paper-table th{text-align:left;padding:10px 12px;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;border-bottom:2px solid var(--border);cursor:pointer;user-select:none;white-space:nowrap}
-  .paper-table th:hover{color:var(--text)}
-  .paper-table th .sort-arrow{font-size:10px;margin-left:4px;color:var(--accent)}
-  .paper-table td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
-  .paper-table tr:hover{background:var(--bg3)}
-  .paper-table tr{cursor:pointer}
-  .paper-title{font-weight:600;color:var(--text);max-width:350px}
-  .paper-authors{color:var(--muted);font-size:11px;max-width:350px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;margin-right:4px}
-  /* Tag input widget */
-  .tag-input-wrap{display:flex;flex-wrap:wrap;gap:4px;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;min-height:38px;cursor:text}
-  .tag-input-wrap:focus-within{border-color:var(--accent)}
-  .tag-input-wrap input{background:none;border:none;color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;outline:none;flex:1;min-width:80px;padding:2px 0}
-  .tag-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(79,156,249,0.15);color:#4f9cf9}
-  .tag-pill-x{cursor:pointer;font-size:13px;line-height:1;opacity:0.6}
-  .tag-pill-x:hover{opacity:1}
-  .tag-suggest{position:relative;display:none;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;margin-top:4px;max-height:200px;overflow-y:auto;z-index:20}
-  .tag-suggest-item{padding:6px 12px;font-size:12px;cursor:pointer}
-  .tag-suggest-item:hover{background:var(--bg3);color:var(--accent)}
-  .status-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:4px}
+  /* Library layout */
+  .library{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;align-items:start}
+  .facets{position:sticky;top:12px;display:flex;flex-direction:column;gap:14px}
+  .facet{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:10px 12px}
+  .facet-head{display:flex;align-items:center;justify-content:space-between;font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;cursor:pointer;user-select:none}
+  .facet-head .caret{font-size:9px;transition:transform 0.15s}
+  .facet.collapsed .caret{transform:rotate(-90deg)}
+  .facet.collapsed .facet-body{display:none}
+  .facet-body{display:flex;flex-direction:column;gap:2px}
+  .facet-opt{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 8px;border-radius:6px;font-size:12px;color:var(--text2);cursor:pointer;border:none;background:none;text-align:left;width:100%}
+  .facet-opt:hover{background:var(--bg3);color:var(--text)}
+  .facet-opt.active{background:rgba(79,156,249,0.12);color:var(--accent)}
+  .facet-opt.dim{opacity:0.45}
+  .facet-opt .n{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted)}
+  .facet-opt .lbl{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .facet-more{font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:4px 8px;text-align:left}
+  .mode-toggle{display:inline-flex;border:1px solid var(--border2);border-radius:6px;overflow:hidden;font-size:9px;letter-spacing:0.3px}
+  .mode-toggle button{background:none;border:none;color:var(--muted);padding:2px 6px;cursor:pointer;font-weight:600;font-size:9px}
+  .mode-toggle button.on{background:var(--accent);color:#000}
+
+  .toolbar{display:flex;gap:10px;margin-bottom:12px;align-items:center;flex-wrap:wrap}
+  .toolbar .input.search{flex:1;min-width:200px}
+  .toolbar select.input{width:auto}
+  .result-count{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-height:22px}
+  .active-chip{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:12px;background:rgba(79,156,249,0.12);color:var(--accent);font-size:11px;font-weight:500;cursor:pointer;border:1px solid transparent}
+  .active-chip:hover{border-color:var(--accent)}
+
+  /* Paper rows */
+  .rows{display:flex;flex-direction:column}
+  .row{display:grid;grid-template-columns:18px minmax(0,1fr) 190px;gap:14px;padding:14px 12px;border-bottom:1px solid var(--border);cursor:pointer;border-radius:8px;transition:background 0.1s}
+  .row:hover{background:var(--bg2)}
+  .row-main{min-width:0}
+  .row-title{font-weight:600;font-size:14px;line-height:1.35;color:var(--text);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .row-authors{color:var(--muted);font-size:11.5px;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .row-meta{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:11.5px;color:var(--text2);margin-top:6px;align-items:center}
+  .row-meta .year{font-family:'DM Mono',monospace;color:var(--text);font-weight:500}
+  .row-meta .k{color:var(--muted)}
+  .row-meta a{font-size:10.5px;text-decoration:none;font-weight:600}
+  .row-findings{font-size:12.5px;color:var(--text2);margin-top:8px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .row-findings.open{display:block;-webkit-line-clamp:unset}
+  .row-side{display:flex;flex-direction:column;gap:6px;align-items:flex-end;text-align:right}
+  .row-side .tags{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-end}
+  .row-side .added{font-size:10.5px;color:var(--muted);font-family:'DM Mono',monospace}
+  .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600;white-space:nowrap}
+  .jc-badge{display:inline-flex;align-items:center;gap:4px;padding:1px 7px;border-radius:4px;font-size:10px;font-weight:600;background:rgba(244,114,182,0.15);color:var(--pink)}
+  .status-dot{display:inline-block;width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:4px;border:none;cursor:pointer;padding:0}
   .status-read{background:var(--green)}.status-reading{background:var(--yellow)}.status-unread{background:var(--muted)}
 
-  /* Paper detail / editor */
-  .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
-  .detail-overlay.open{display:flex}
-  .detail-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;width:100%;max-width:750px;padding:28px;position:relative}
-  .detail-close{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
-  .detail-close:hover{color:var(--text)}
+  /* Journal club */
+  .jc-wrap{max-width:960px}
+  .jc-section-title{font-size:11px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+  .jc-card{display:grid;grid-template-columns:92px minmax(0,1fr);gap:18px;background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin-bottom:12px}
+  .jc-date{text-align:center;border-right:1px solid var(--border);padding-right:14px}
+  .jc-date .d{font-size:26px;font-weight:700;font-family:'DM Mono',monospace;line-height:1;color:var(--pink)}
+  .jc-date .m{font-size:11px;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px;margin-top:4px}
+  .jc-date .y{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace}
+  .jc-date .tbd{font-size:12px;color:var(--muted);font-weight:600;padding-top:10px}
+  .jc-title{font-weight:600;font-size:15px;line-height:1.35;cursor:pointer}
+  .jc-title:hover{color:var(--accent)}
+  .jc-sub{font-size:12px;color:var(--muted);margin-top:3px}
+  .jc-meta{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:12px;color:var(--text2);margin-top:8px;align-items:center}
+  .jc-block{margin-top:10px;font-size:12.5px;line-height:1.55;color:var(--text2)}
+  .jc-block .lbl{font-size:10.5px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+  .jc-discussion{width:100%;min-height:64px;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:8px 10px;color:var(--text);font-size:12.5px;font-family:inherit;resize:vertical;outline:none;line-height:1.5}
+  .jc-discussion:focus{border-color:var(--pink)}
+  .jc-actions{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+
+  /* Forms */
   .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   .form-group{display:flex;flex-direction:column}
   .form-group.full{grid-column:1/-1}
   .form-group label{font-size:11px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px}
-  .form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:'Outfit',sans-serif;outline:none}
+  .form-group input,.form-group select,.form-group textarea{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:9px 12px;color:var(--text);font-size:13px;font-family:inherit;outline:none}
   .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--accent)}
   .form-group textarea{resize:vertical;min-height:70px}
-  .form-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+  .form-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
+  .form-section{grid-column:1/-1;border:1px solid var(--border);border-radius:10px;padding:12px 14px;background:var(--bg2)}
+  .form-section .sec-head{display:flex;align-items:center;gap:10px;font-size:12px;font-weight:600}
+  .form-section .sec-head input[type=checkbox]{width:15px;height:15px;accent-color:var(--pink)}
+  .form-section .sec-body{display:none;margin-top:12px}
+  .form-section.on .sec-body{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-  /* DOI lookup */
-  .doi-bar{display:flex;gap:8px;margin-bottom:20px}
-  .doi-bar input{flex:1}
-  .doi-status{font-size:12px;margin-top:6px}
+  /* Tag input widget */
+  .tag-input-wrap{display:flex;flex-wrap:wrap;gap:4px;align-items:center;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:6px 10px;min-height:38px;cursor:text}
+  .tag-input-wrap:focus-within{border-color:var(--accent)}
+  .tag-input-wrap input{background:none;border:none;color:var(--text);font-size:13px;font-family:inherit;outline:none;flex:1;min-width:80px;padding:2px 0}
+  .tag-pill{display:inline-flex;align-items:center;gap:3px;padding:2px 8px;border-radius:4px;font-size:10px;font-weight:600}
+  .tag-pill-x{cursor:pointer;font-size:13px;line-height:1;opacity:0.6}
+  .tag-pill-x:hover{opacity:1}
+  .tag-suggest{position:relative;display:none;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;margin-top:4px;max-height:200px;overflow-y:auto;z-index:20}
+  .tag-suggest-item{padding:6px 12px;font-size:12px;cursor:pointer}
+  .tag-suggest-item:hover{background:var(--bg3)}
+
+  .doi-bar{display:flex;gap:8px;margin-bottom:6px}
+  .doi-status{font-size:12px;margin-bottom:16px;min-height:16px}
   .doi-status.ok{color:var(--green)}.doi-status.err{color:var(--red)}.doi-status.loading{color:var(--yellow)}
 
-  /* Stats */
-  .stats-row{display:flex;gap:16px;margin-bottom:16px;flex-wrap:wrap}
-  .stat-card{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:14px 18px;min-width:120px}
-  .stat-val{font-size:24px;font-weight:700;font-family:'DM Mono',monospace}
-  .stat-label{font-size:11px;color:var(--muted);margin-top:2px}
+  /* Detail overlay */
+  .detail-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:50;display:none;align-items:flex-start;justify-content:center;padding:40px 20px;overflow-y:auto}
+  .detail-overlay.open{display:flex}
+  .detail-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;width:100%;max-width:760px;padding:28px;position:relative}
+  .detail-close{position:absolute;top:14px;right:14px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+  .detail-close:hover{color:var(--text)}
+  .detail-nav{position:absolute;top:14px;right:44px;display:flex;gap:2px}
+  .detail-nav button{background:none;border:none;color:var(--muted);font-size:16px;cursor:pointer;padding:0 6px}
+  .detail-nav button:hover{color:var(--text)}
+  .detail-nav button:disabled{opacity:0.25;cursor:default}
+  .d-box{background:var(--bg3);border-radius:8px;padding:12px;margin-bottom:12px}
+  .d-lbl{font-size:11px;font-weight:600;margin-bottom:4px;letter-spacing:0.4px}
 
   /* Batch Claude */
   .claude-box{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:16px}
   .claude-box pre{background:var(--bg3);border-radius:8px;padding:14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--text);overflow-x:auto;white-space:pre-wrap;max-height:400px;overflow-y:auto;margin-top:10px}
 
   /* Setup modal */
-  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;display:none;align-items:center;justify-content:center}
+  .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
   .modal-overlay.open{display:flex}
   .modal-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:28px;width:100%;max-width:420px}
   .modal-card h3{font-size:16px;margin-bottom:12px}
   .modal-card p{font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6}
 
-  /* Empty state */
   .empty{text-align:center;padding:60px 20px;color:var(--muted)}
   .empty h3{font-size:18px;color:var(--text);margin-bottom:8px}
   .empty p{font-size:13px;margin-bottom:20px}
 
-  @media(max-width:768px){.form-grid{grid-template-columns:1fr}.search-bar{flex-direction:column}}
+  @media(max-width:900px){
+    .library{grid-template-columns:minmax(0,1fr)}
+    .library>section{min-width:0}
+    .facets{position:static;flex-direction:row;flex-wrap:wrap;gap:8px}
+    .facet{flex:1 1 180px}
+    .facet.collapsed{flex:0 1 auto}
+  }
+  @media(max-width:768px){
+    header,.tabs,.panel{padding-left:16px;padding-right:16px}
+    .form-grid,.form-section.on .sec-body{grid-template-columns:1fr}
+    .row{grid-template-columns:18px minmax(0,1fr)}
+    .row-side{grid-column:2;align-items:flex-start;text-align:left;flex-direction:row;flex-wrap:wrap;align-items:center}
+    .row-side .tags{justify-content:flex-start}
+    .jc-card{grid-template-columns:1fr}
+    .jc-date{border-right:none;border-bottom:1px solid var(--border);padding:0 0 10px;display:flex;gap:8px;align-items:baseline}
+    .jc-date .d{font-size:20px}
+    .stat-card{min-width:100px}
+  }
 </style>
 </head>
 <body>
@@ -139,30 +217,58 @@
   </div>
 </header>
 
-<div class="tabs">
-  <button class="tab active" onclick="switchTab('library')">Library</button>
-  <button class="tab" onclick="switchTab('add')">+ Add Paper</button>
-  <button class="tab" onclick="switchTab('claude')">Batch Claude</button>
-</div>
+<nav class="tabs">
+  <button class="tab active" data-tab="library" onclick="switchTab('library')">Library</button>
+  <button class="tab" data-tab="jc" onclick="switchTab('jc')">Journal Club <span class="count" id="jcCount">0</span></button>
+  <button class="tab" data-tab="add" onclick="switchTab('add')">+ Add Paper</button>
+  <button class="tab" data-tab="claude" onclick="switchTab('claude')">Batch Claude</button>
+</nav>
 
 <!-- LIBRARY -->
 <div class="panel active" id="tab-library">
   <div class="stats-row" id="statsRow"></div>
-  <div class="search-bar">
-    <input class="search-input" id="searchInput" placeholder="Search title, authors, keywords, brain region, methods...">
-    <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear</button>
+  <div class="library">
+    <aside class="facets" id="facets"></aside>
+    <section>
+      <div class="toolbar">
+        <input class="input search" id="searchInput" placeholder="Search title, authors, journal, region, methods, findings, notes...">
+        <select class="input" id="sortSelect" onchange="setSort(this.value)">
+          <option value="added">Recently added</option>
+          <option value="year-desc">Year, newest</option>
+          <option value="year-asc">Year, oldest</option>
+          <option value="title">Title A–Z</option>
+          <option value="journal">Journal A–Z</option>
+          <option value="status">Status</option>
+        </select>
+        <button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear</button>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div id="libraryContent"></div>
+    </section>
   </div>
-  <div class="filter-row" id="tagFilterRow"></div>
-  <div id="libraryContent"></div>
+</div>
+
+<!-- JOURNAL CLUB -->
+<div class="panel" id="tab-jc">
+  <div class="jc-wrap">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap">
+      <div>
+        <h3 style="margin-bottom:4px">Journal Club</h3>
+        <p style="font-size:12px;color:var(--muted)">Papers marked for journal club, with presentation date and discussion notes. Notes save automatically when you click away.</p>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="startAddJC()">+ Add journal club paper</button>
+    </div>
+    <div id="jcContent"></div>
+  </div>
 </div>
 
 <!-- ADD PAPER -->
 <div class="panel" id="tab-add">
-  <div style="max-width:750px">
-    <h3 style="margin-bottom:4px">Add New Paper</h3>
-    <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Paste a DOI to auto-fill, or enter details manually.</p>
+  <div style="max-width:760px">
+    <h3 style="margin-bottom:4px" id="addFormTitle">Add New Paper</h3>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Paste a DOI, publisher URL, or PubMed link to auto-fill, or enter details manually.</p>
     <div class="doi-bar">
-      <input class="search-input" id="doiInput" placeholder="Paste DOI (e.g. 10.1038/s41586-023-06170-6) or title to search...">
+      <input class="input" id="doiInput" placeholder="Paste DOI (e.g. 10.1038/s41586-023-06170-6), article URL, or title to search...">
       <button class="btn btn-primary" onclick="lookupDOI()">Lookup</button>
     </div>
     <div class="doi-status" id="doiStatus"></div>
@@ -170,10 +276,10 @@
       <div class="form-group full"><label>Title</label><input id="f-title"></div>
       <div class="form-group"><label>Authors</label><input id="f-authors" placeholder="Last, First; Last, First"></div>
       <div class="form-group"><label>Year</label><input type="number" id="f-year"></div>
-      <div class="form-group"><label>Journal</label><input id="f-journal"></div>
+      <div class="form-group"><label>Journal</label><input id="f-journal" list="dl-journal"></div>
       <div class="form-group"><label>DOI</label><input id="f-doi"></div>
-      <div class="form-group"><label>Species / Model</label><input id="f-species" placeholder="e.g. mouse, rat, human"></div>
-      <div class="form-group"><label>Brain Region / Topic</label><input id="f-region" placeholder="e.g. LC, VTA, PFC, spinal cord"></div>
+      <div class="form-group"><label>Species / Model</label><input id="f-species" list="dl-species" placeholder="e.g. mouse, rat, human"></div>
+      <div class="form-group"><label>Brain Region / Topic</label><input id="f-region" list="dl-region" placeholder="e.g. LC, prefrontal cortex, hippocampus"></div>
       <div class="form-group full">
         <label>Tags</label>
         <div class="tag-input-wrap" id="tagInputWrap" onclick="document.getElementById('f-tags').focus()">
@@ -191,15 +297,25 @@
           <option value="read">Read</option>
         </select>
       </div>
-      <div class="form-group"><label>Project Tag</label><input id="f-project" placeholder="e.g. pub1, grant, thesis"></div>
+      <div class="form-group"><label>Project Tag</label><input id="f-project" list="dl-project" placeholder="e.g. AD-LC, grant, thesis"></div>
       <div class="form-group"><label>Funding</label><input id="f-funding" placeholder="e.g. NIH R01, NSF"></div>
+
+      <div class="form-section" id="jcSection">
+        <label class="sec-head"><input type="checkbox" id="f-jc" onchange="toggleJCSection()"> Journal club paper</label>
+        <div class="sec-body">
+          <div class="form-group"><label>Presentation date</label><input type="date" id="f-jc-date"></div>
+          <div class="form-group"><label>Presenter</label><input id="f-jc-presenter" placeholder="Who is presenting"></div>
+          <div class="form-group full"><label>Discussion notes</label><textarea id="f-jc-discussion" rows="3" placeholder="Questions to raise, points from the discussion..."></textarea></div>
+        </div>
+      </div>
+
       <div class="form-group full"><label>Abstract</label><textarea id="f-abstract" rows="4"></textarea></div>
-      <div class="form-group full"><label>Key Findings</label><textarea id="f-findings" rows="2" placeholder="1-2 sentence summary of the main result"></textarea></div>
+      <div class="form-group full"><label>Key Findings</label><textarea id="f-findings" rows="2" placeholder="1-3 sentence summary of the main result"></textarea></div>
       <div class="form-group full"><label>Your Notes</label><textarea id="f-notes" rows="2" placeholder="Why this paper matters to your work"></textarea></div>
     </div>
     <div class="form-actions">
       <button class="btn btn-secondary" onclick="clearAddForm()">Clear</button>
-      <button class="btn btn-primary" onclick="savePaper()">Save Paper</button>
+      <button class="btn btn-primary" onclick="savePaper()" id="saveBtn">Save Paper</button>
     </div>
   </div>
 </div>
@@ -209,19 +325,19 @@
   <div style="max-width:800px">
     <h3 style="margin-bottom:4px">Batch Extract with Claude</h3>
     <p style="font-size:12px;color:var(--muted);margin-bottom:16px">Generate a prompt for Claude.ai to extract structured metadata from your papers' abstracts.</p>
-    <div style="margin-bottom:12px">
+    <div style="margin-bottom:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <label style="font-size:12px;color:var(--muted)">Select papers to process:</label>
-      <select id="claudeFilter" style="background:var(--bg3);border:1px solid var(--border2);border-radius:6px;padding:6px 10px;color:var(--text);font-size:13px;margin-left:8px">
+      <select class="input" id="claudeFilter" style="width:auto">
         <option value="no-findings">Papers missing key findings</option>
         <option value="no-species">Papers missing species/model</option>
         <option value="all">All papers</option>
       </select>
-      <button class="btn btn-primary btn-sm" style="margin-left:8px" onclick="generateClaudePrompt()">Generate Prompt</button>
+      <button class="btn btn-primary btn-sm" onclick="generateClaudePrompt()">Generate Prompt</button>
     </div>
     <div class="claude-box" id="claudeBox" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
         <span style="font-size:13px;font-weight:600">Prompt for Claude.ai</span>
-        <button class="btn btn-secondary btn-sm" onclick="copyClaudePrompt()">Copy to Clipboard</button>
+        <button class="btn btn-secondary btn-sm" onclick="copyClaudePrompt(this)">Copy to Clipboard</button>
       </div>
       <pre id="claudePrompt"></pre>
     </div>
@@ -238,6 +354,10 @@
 <!-- Detail overlay -->
 <div class="detail-overlay" id="detailOverlay">
   <div class="detail-card">
+    <div class="detail-nav">
+      <button id="detailPrev" onclick="detailStep(-1)" title="Previous (←)">&#8592;</button>
+      <button id="detailNext" onclick="detailStep(1)" title="Next (→)">&#8594;</button>
+    </div>
     <button class="detail-close" onclick="closeDetail()">&times;</button>
     <div id="detailContent"></div>
   </div>
@@ -260,6 +380,11 @@
   </div>
 </div>
 
+<datalist id="dl-species"></datalist>
+<datalist id="dl-region"></datalist>
+<datalist id="dl-journal"></datalist>
+<datalist id="dl-project"></datalist>
+
 <script>
 (function(){
 "use strict";
@@ -274,24 +399,21 @@ const DATA_PATH = 'papers.json';
 function getSyncConfig() {
   try { return JSON.parse(localStorage.getItem(SYNC_KEY)); } catch { return null; }
 }
-
 function setSyncConfig(cfg) {
   localStorage.setItem(SYNC_KEY, JSON.stringify(cfg));
 }
-
 function setSyncStatus(state, text) {
   const el = document.getElementById('syncStatus');
   el.className = 'sync-status ' + state;
   el.textContent = text || state;
 }
 
-// Load from GitHub API (raw content)
 async function loadFromCloud() {
   const cfg = getSyncConfig();
   if (!cfg?.token) return null;
   try {
     const res = await fetch(
-      `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${DATA_PATH}`,
+      `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${DATA_PATH}?t=${Date.now()}`,
       { headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github.v3.raw' } }
     );
     if (!res.ok) return null;
@@ -300,103 +422,73 @@ async function loadFromCloud() {
   } catch { return null; }
 }
 
-// Save to GitHub API (create or update)
 async function saveToCloud(data) {
   const cfg = getSyncConfig();
   if (!cfg?.token) return false;
-
   const url = `https://api.github.com/repos/${cfg.owner}/${cfg.repo}/contents/${DATA_PATH}`;
-  const headers = {
-    Authorization: `Bearer ${cfg.token}`,
-    Accept: 'application/vnd.github.v3+json',
-    'Content-Type': 'application/json',
-  };
-
-  // Get current SHA (cache-bust to avoid hitting loadFromCloud's cached raw response)
-  let sha;
   try {
+    let sha = null;
     const res = await fetch(url + '?t=' + Date.now(), {
-      headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github.v3+json' },
-      cache: 'no-store',
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github+json' }
     });
-    if (res.ok) {
-      const meta = await res.json();
-      sha = meta.sha;
-    }
-  } catch {}
-
-  // Encode content as base64 (TextEncoder handles UTF-8 correctly)
-  const jsonStr = JSON.stringify(data, null, 2);
-  const bytes = new TextEncoder().encode(jsonStr);
-  let binary = '';
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-  const content = btoa(binary);
-
-  try {
-    const body = {
-      message: `Update papers ${new Date().toISOString().slice(0, 16)}`,
-      content,
-    };
+    if (res.ok) { const meta = await res.json(); sha = meta.sha; }
+    const bytes = new TextEncoder().encode(JSON.stringify(data, null, 2));
+    let binary = '';
+    for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
+    const content = btoa(binary);
+    const body = { message: `Update papers ${new Date().toISOString().slice(0,16)}`, content };
     if (sha) body.sha = sha;
-    const res = await fetch(url, {
+    const put = await fetch(url, {
       method: 'PUT',
-      headers,
-      body: JSON.stringify(body),
+      headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github+json', 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      console.error('GitHub save failed:', res.status, err);
-    }
-    return res.ok;
-  } catch (e) { console.error('GitHub save error:', e); return false; }
+    if (!put.ok) { console.error('GitHub save failed', put.status, await put.text()); return false; }
+    return true;
+  } catch (e) { console.error('GitHub save error', e); return false; }
+}
+
+let saveTimer = null;
+let saveInFlight = false;
+let saveQueued = false;
+function save() {
+  localStorage.setItem(CACHE_KEY, JSON.stringify(papers));
+  if (!getSyncConfig()?.token) { setSyncStatus('offline', 'Local only'); return; }
+  setSyncStatus('saving', 'Saving...');
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(pushToCloud, 1200);
+}
+async function pushToCloud() {
+  if (saveInFlight) { saveQueued = true; return; }
+  saveInFlight = true;
+  const ok = await saveToCloud(papers);
+  saveInFlight = false;
+  if (saveQueued) { saveQueued = false; return pushToCloud(); }
+  setSyncStatus(ok ? 'saved' : 'error', ok ? 'Synced' : 'Save failed');
 }
 
 // =====================================================================
-// DATA
+// STATE
 // =====================================================================
 let papers = [];
 let editingId = null;
-let sortCol = 'year', sortAsc = false;
-let activeTags = new Set();
 let currentFormTags = [];
-let _saveTimer = null;
-let _saving = false;
+let sortMode = 'added';
+let tagMode = 'and';
+const filters = { tags: new Set(), species: new Set(), year: new Set(), project: new Set(), status: new Set() };
+const NARROW = window.matchMedia('(max-width: 900px)').matches;
+const facetCollapsed = { tags: NARROW, species: NARROW, year: true, project: NARROW, status: NARROW };
+const facetExpanded = { tags: false, species: false, year: false, project: false, status: false };
+let lastRendered = [];   // ids in current library order, for detail prev/next
+let detailId = null;
+const expandedFindings = new Set();
+const TODAY = new Date().toISOString().slice(0,10);
 
-// Save: write to localStorage immediately, debounce GitHub push
-function save() {
-  localStorage.setItem(CACHE_KEY, JSON.stringify(papers));
-  // Debounce cloud save (2 seconds after last edit)
-  clearTimeout(_saveTimer);
-  _saveTimer = setTimeout(() => pushToCloud(), 2000);
-}
-
-async function pushToCloud() {
-  const cfg = getSyncConfig();
-  if (!cfg?.token) {
-    setSyncStatus('offline', 'Local only');
-    return;
-  }
-  if (_saving) { // retry after current save finishes
-    clearTimeout(_saveTimer);
-    _saveTimer = setTimeout(() => pushToCloud(), 3000);
-    return;
-  }
-  _saving = true;
-  setSyncStatus('saving', 'Saving...');
-  const ok = await saveToCloud(papers);
-  _saving = false;
-  setSyncStatus(ok ? 'saved' : 'error', ok ? 'Saved' : 'Save failed');
-  if (ok) setTimeout(() => setSyncStatus('saved', 'Synced'), 2000);
-}
-
-// =====================================================================
-// TAGS SYSTEM
-// =====================================================================
 const TAG_PALETTE = [
   {bg:'rgba(79,156,249,0.15)',fg:'#4f9cf9'},
   {bg:'rgba(52,211,153,0.15)',fg:'#34d399'},
-  {bg:'rgba(239,68,68,0.15)',fg:'#ef4444'},
   {bg:'rgba(251,191,36,0.15)',fg:'#fbbf24'},
+  {bg:'rgba(239,68,68,0.15)',fg:'#ef4444'},
   {bg:'rgba(167,139,250,0.15)',fg:'#a78bfa'},
   {bg:'rgba(244,114,182,0.15)',fg:'#f472b6'},
   {bg:'rgba(56,189,248,0.15)',fg:'#38bdf8'},
@@ -413,32 +505,32 @@ function tagHtml(t) {
   const c = tagColor(t);
   return `<span class="tag" style="background:${c.bg};color:${c.fg}">${esc(t)}</span>`;
 }
-function getTags(p) {
-  if (Array.isArray(p.tags) && p.tags.length) return p.tags;
-  if (p.type) return [p.type];
-  return [];
+function esc(s) { const d = document.createElement('div'); d.textContent = s || ''; return d.innerHTML; }
+function attr(s) { return String(s || '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/'/g,'&#39;').replace(/</g,'&lt;'); }
+
+function getTags(p) { return Array.isArray(p.tags) ? p.tags : []; }
+function speciesTokens(p) {
+  return (p.species || '').replace(/\([^)]*\)/g, '').split(/[,;/]/).map(s => s.trim()).filter(Boolean);
 }
-function getAllTags() {
-  const counts = {};
-  papers.forEach(p => getTags(p).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
-  return Object.entries(counts).sort((a, b) => b[1] - a[1]).map(e => e[0]);
-}
-function migrateTags() {
+function addedDate(p) { return (p.added || '').slice(0, 10); }
+function isJC(p) { return !!p.journalClub; }
+
+function migrate() {
   papers.forEach(p => {
-    if (!Array.isArray(p.tags)) {
-      p.tags = p.type ? [p.type] : [];
-    }
+    if (!Array.isArray(p.tags)) p.tags = p.type ? [p.type] : [];
+    if (!p.status) p.status = 'unread';
+    if (p.journalClub && typeof p.journalClub !== 'object') p.journalClub = { date: '', presenter: '', discussion: '' };
   });
 }
 
-// Init: load from GitHub first, fall back to cache, then static file
+// =====================================================================
+// INIT
+// =====================================================================
 async function init() {
   setSyncStatus('saving', 'Loading...');
-
   const cfg = getSyncConfig();
   let loaded = false;
 
-  // Try GitHub API
   if (cfg?.token) {
     const cloud = await loadFromCloud();
     if (cloud) {
@@ -448,42 +540,36 @@ async function init() {
       loaded = true;
     }
   }
-
-  // Fall back to localStorage cache
   if (!loaded) {
     try {
       const cached = JSON.parse(localStorage.getItem(CACHE_KEY));
-      if (Array.isArray(cached) && cached.length > 0) {
-        papers = cached;
-        loaded = true;
-      }
+      if (Array.isArray(cached) && cached.length > 0) { papers = cached; loaded = true; }
     } catch {}
   }
-
-  // Fall back to static papers.json
   if (!loaded) {
     try {
       const base = location.pathname.replace(/\/[^/]*$/, '/');
       const res = await fetch(base + 'papers.json?t=' + Date.now());
       if (res.ok) {
         const data = await res.json();
-        if (Array.isArray(data) && data.length > 0) {
-          papers = data;
-          loaded = true;
-        }
+        if (Array.isArray(data) && data.length > 0) { papers = data; loaded = true; }
       }
     } catch {}
   }
 
-  if (!cfg?.token) {
-    setSyncStatus('offline', papers.length ? 'Local only' : 'Setup sync');
-  } else if (!loaded) {
-    setSyncStatus('error', 'No data');
-  }
+  if (!cfg?.token) setSyncStatus('offline', papers.length ? 'Local only' : 'Setup sync');
+  else if (!loaded) setSyncStatus('error', 'No data');
 
-  migrateTags();
-  renderTagFilters();
+  migrate();
+  refreshAll();
+}
+
+function refreshAll() {
+  renderStats();
+  renderFacets();
   renderLibrary();
+  renderJC();
+  fillDatalists();
 }
 
 // =====================================================================
@@ -498,11 +584,7 @@ window.showSetup = function() {
   }
   document.getElementById('setupModal').classList.add('open');
 };
-
-window.closeSetup = function() {
-  document.getElementById('setupModal').classList.remove('open');
-};
-
+window.closeSetup = function() { document.getElementById('setupModal').classList.remove('open'); };
 window.saveSetup = function() {
   const token = document.getElementById('setup-token').value.trim();
   const owner = document.getElementById('setup-owner').value.trim();
@@ -510,7 +592,6 @@ window.saveSetup = function() {
   if (!token) return;
   setSyncConfig({ token, owner, repo });
   closeSetup();
-  // Save current data to cloud immediately
   save();
 };
 
@@ -519,80 +600,218 @@ window.saveSetup = function() {
 // =====================================================================
 window.switchTab = function(id) {
   document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  event.target.classList.add('active');
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === id));
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id === 'jc') renderJC();
 };
 
-function switchTabDirect(id) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-'+id).classList.add('active');
-  document.querySelectorAll('.tab').forEach(t => { if(t.textContent.toLowerCase().includes(id==='add'?'add':id)) t.classList.add('active'); });
+// =====================================================================
+// FILTERING
+// =====================================================================
+function paperMatchesFacet(p, key) {
+  const sel = filters[key];
+  if (sel.size === 0) return true;
+  if (key === 'tags') {
+    const pt = getTags(p);
+    return tagMode === 'and' ? [...sel].every(t => pt.includes(t)) : [...sel].some(t => pt.includes(t));
+  }
+  if (key === 'species') return speciesTokens(p).some(s => sel.has(s));
+  if (key === 'year') return sel.has(String(p.year || ''));
+  if (key === 'project') return sel.has(p.project || '(none)');
+  if (key === 'status') return sel.has(p.status || 'unread');
+  return true;
+}
+function searchWords() {
+  return document.getElementById('searchInput').value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+}
+function matchesSearch(p, words) {
+  if (!words.length) return true;
+  const hay = [p.title, p.authors, p.journal, p.species, p.region, p.methods, p.findings, p.notes, p.project, p.abstract, p.funding,
+    p.journalClub?.presenter, p.journalClub?.discussion, ...getTags(p)].join(' ').toLowerCase();
+  return words.every(w => hay.includes(w));
+}
+function filteredPapers(excludeFacet) {
+  const words = searchWords();
+  return papers.filter(p => matchesSearch(p, words) &&
+    Object.keys(filters).every(k => k === excludeFacet || paperMatchesFacet(p, k)));
+}
+function anyFilterActive() {
+  return searchWords().length > 0 || Object.values(filters).some(s => s.size > 0);
 }
 
-// =====================================================================
-// RENDER LIBRARY
-// =====================================================================
-function renderLibrary() {
-  renderStats();
-  const query = document.getElementById('searchInput').value.toLowerCase().trim();
-  let filtered = papers.filter(p => {
-    if (activeTags.size > 0) {
-      const pt = getTags(p);
-      if (!Array.from(activeTags).every(t => pt.includes(t))) return false;
+function sortPapers(list) {
+  const cmpStr = (a, b, k) => String(a[k] || '').toLowerCase().localeCompare(String(b[k] || '').toLowerCase());
+  const yr = p => parseInt(p.year) || 0;
+  const statusRank = { reading: 0, unread: 1, read: 2 };
+  return list.slice().sort((a, b) => {
+    switch (sortMode) {
+      case 'added': return (addedDate(b).localeCompare(addedDate(a))) || (yr(b) - yr(a)) || cmpStr(a, b, 'title');
+      case 'year-desc': return (yr(b) - yr(a)) || cmpStr(a, b, 'title');
+      case 'year-asc': return (yr(a) - yr(b)) || cmpStr(a, b, 'title');
+      case 'title': return cmpStr(a, b, 'title');
+      case 'journal': return cmpStr(a, b, 'journal') || (yr(b) - yr(a));
+      case 'status': return (statusRank[a.status || 'unread'] - statusRank[b.status || 'unread']) || (yr(b) - yr(a));
     }
-    if (query) {
-      const haystack = [p.title,p.authors,p.journal,p.species,p.region,p.methods,p.findings,p.notes,p.project,p.abstract,p.funding,...getTags(p)].join(' ').toLowerCase();
-      return query.split(/\s+/).every(w => haystack.includes(w));
-    }
-    return true;
-  });
-
-  filtered.sort((a, b) => {
-    let va = (a[sortCol] || ''), vb = (b[sortCol] || '');
-    if (sortCol === 'year') { va = parseInt(va)||0; vb = parseInt(vb)||0; }
-    else { va = String(va).toLowerCase(); vb = String(vb).toLowerCase(); }
-    if (va < vb) return sortAsc ? -1 : 1;
-    if (va > vb) return sortAsc ? 1 : -1;
     return 0;
   });
-
-  const el = document.getElementById('libraryContent');
-  if (papers.length === 0) {
-    el.innerHTML = '<div class="empty"><h3>No papers yet</h3><p>Click "+ Add Paper" to get started, or import a JSON file.</p></div>';
-    return;
-  }
-  if (filtered.length === 0) {
-    el.innerHTML = '<div class="empty"><p>No papers match your search/filters.</p></div>';
-    return;
-  }
-
-  const arrow = col => sortCol === col ? '<span class="sort-arrow">' + (sortAsc ? '\u25B2' : '\u25BC') + '</span>' : '';
-  el.innerHTML = `<table class="paper-table">
-    <thead><tr>
-      <th onclick="sortBy('status')" style="width:30px">St${arrow('status')}</th>
-      <th onclick="sortBy('title')">Title${arrow('title')}</th>
-      <th onclick="sortBy('year')" style="width:50px">Year${arrow('year')}</th>
-      <th onclick="sortBy('journal')" style="width:90px">Journal${arrow('journal')}</th>
-      <th>Tags</th>
-      <th onclick="sortBy('species')" style="width:60px">Model${arrow('species')}</th>
-      <th onclick="sortBy('region')" style="width:80px">Region${arrow('region')}</th>
-      <th>Findings</th>
-    </tr></thead>
-    <tbody>${filtered.map(p => {
-      return `<tr onclick="openDetail('${p.id}')">
-        <td><span class="status-dot status-${p.status||'unread'}" onclick="event.stopPropagation();toggleStatus('${p.id}')" title="Click to toggle" style="cursor:pointer"></span></td>
-        <td><div class="paper-title">${esc(p.title||'Untitled')}</div><div class="paper-authors">${esc(p.authors||'')}</div></td>
-        <td>${p.year||''}</td>
-        <td style="font-size:11px;color:var(--muted)">${esc(p.journal||'')}${p.doi ? ' <a href="'+(p.doi.startsWith('http')?esc(p.doi):'https://doi.org/'+esc(p.doi))+'" target="_blank" onclick="event.stopPropagation()" style="color:var(--accent);font-size:10px">'+(p.doi.startsWith('http')?'Link':'DOI')+'</a>' : ''}</td>
-        <td style="max-width:180px">${getTags(p).map(t => tagHtml(t)).join(' ')}</td>
-        <td style="font-size:11px">${esc(p.species||'')}</td>
-        <td style="font-size:11px">${esc(p.region||'')}</td>
-        <td style="font-size:11px;color:var(--muted)">${esc((p.findings||'').substring(0,200))}${(p.findings||'').length>200?'...':''}</td>
-      </tr>`;
-    }).join('')}</tbody></table>`;
 }
+
+window.setSort = function(v) { sortMode = v; renderLibrary(); };
+
+document.getElementById('searchInput').addEventListener('input', () => { renderFacets(); renderLibrary(); });
+window.clearFilters = function() {
+  document.getElementById('searchInput').value = '';
+  Object.values(filters).forEach(s => s.clear());
+  renderFacets(); renderLibrary();
+};
+window.toggleFilter = function(key, val) {
+  const s = filters[key];
+  if (s.has(val)) s.delete(val); else s.add(val);
+  renderFacets(); renderLibrary();
+};
+window.clearFacet = function(key) { filters[key].clear(); renderFacets(); renderLibrary(); };
+window.setTagMode = function(m) { tagMode = m; renderFacets(); renderLibrary(); };
+window.toggleFacetCollapse = function(key) { facetCollapsed[key] = !facetCollapsed[key]; renderFacets(); };
+window.toggleFacetMore = function(key) { facetExpanded[key] = !facetExpanded[key]; renderFacets(); };
+
+// =====================================================================
+// FACETS
+// =====================================================================
+const FACET_DEFS = [
+  { key: 'tags', label: 'Tags', values: p => getTags(p) },
+  { key: 'species', label: 'Model', values: p => speciesTokens(p) },
+  { key: 'project', label: 'Project', values: p => [p.project || '(none)'] },
+  { key: 'status', label: 'Status', values: p => [p.status || 'unread'] },
+  { key: 'year', label: 'Year', values: p => p.year ? [String(p.year)] : [] },
+];
+const FACET_LIMIT = 10;
+
+function renderFacets() {
+  const el = document.getElementById('facets');
+  el.innerHTML = FACET_DEFS.map(def => {
+    const base = filteredPapers(def.key);          // counts respect every other facet + search
+    const counts = {};
+    base.forEach(p => def.values(p).forEach(v => { counts[v] = (counts[v] || 0) + 1; }));
+    filters[def.key].forEach(v => { if (!(v in counts)) counts[v] = 0; });
+    let opts = Object.entries(counts);
+    if (def.key === 'year') opts.sort((a, b) => b[0].localeCompare(a[0]));
+    else if (def.key === 'status') { const r = { reading: 0, unread: 1, read: 2 }; opts.sort((a, b) => r[a[0]] - r[b[0]]); }
+    else opts.sort((a, b) => (b[1] - a[1]) || a[0].localeCompare(b[0]));
+    if (def.key === 'project' && opts.length <= 1 && !filters.project.size) return '';
+
+    const total = opts.length;
+    const showAll = facetExpanded[def.key] || total <= FACET_LIMIT + 2;
+    if (!showAll) opts = opts.filter(([v]) => filters[def.key].has(v)).concat(opts.filter(([v]) => !filters[def.key].has(v))).slice(0, FACET_LIMIT);
+
+    const active = filters[def.key].size;
+    const modeToggle = def.key === 'tags' && active > 1
+      ? `<span class="mode-toggle" onclick="event.stopPropagation()"><button class="${tagMode==='and'?'on':''}" onclick="setTagMode('and')" title="Match all selected tags">ALL</button><button class="${tagMode==='or'?'on':''}" onclick="setTagMode('or')" title="Match any selected tag">ANY</button></span>` : '';
+    const clearBtn = active ? `<button class="facet-more" style="padding:0 4px" onclick="event.stopPropagation();clearFacet('${def.key}')" title="Clear">×${active}</button>` : '';
+
+    return `<div class="facet${facetCollapsed[def.key] ? ' collapsed' : ''}">
+      <div class="facet-head" onclick="toggleFacetCollapse('${def.key}')">
+        <span>${def.label}</span>
+        <span style="display:flex;gap:6px;align-items:center">${modeToggle}${clearBtn}<span class="caret">&#9660;</span></span>
+      </div>
+      <div class="facet-body">
+        ${opts.map(([v, n]) => {
+          const on = filters[def.key].has(v);
+          let lbl = esc(v);
+          if (def.key === 'tags') { const c = tagColor(v); lbl = `<span style="display:inline-block;width:7px;height:7px;border-radius:2px;background:${c.fg};margin-right:6px;flex-shrink:0"></span>${lbl}`; }
+          if (def.key === 'status') lbl = `<span class="status-dot status-${esc(v)}" style="width:8px;height:8px;margin:0 6px 0 0"></span>${lbl}`;
+          return `<button class="facet-opt${on ? ' active' : ''}${(!on && n === 0) ? ' dim' : ''}" onclick="toggleFilter('${def.key}','${attr(v)}')"><span class="lbl" style="display:flex;align-items:center;min-width:0">${lbl}</span><span class="n">${n}</span></button>`;
+        }).join('')}
+        ${total > FACET_LIMIT + 2 ? `<button class="facet-more" onclick="toggleFacetMore('${def.key}')">${showAll ? 'Show fewer' : `+${total - FACET_LIMIT} more`}</button>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// =====================================================================
+// STATS
+// =====================================================================
+function renderStats() {
+  const total = papers.length;
+  const read = papers.filter(p => p.status === 'read').length;
+  const cutoff = new Date(Date.now() - 30 * 864e5).toISOString().slice(0,10);
+  const recent = papers.filter(p => addedDate(p) >= cutoff).length;
+  const jc = papers.filter(isJC).length;
+  document.getElementById('jcCount').textContent = jc;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="stat-val" style="color:var(--accent)">${total}</div><div class="stat-label">Papers</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--yellow)">${recent}</div><div class="stat-label">Added last 30 days</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--pink)">${jc}</div><div class="stat-label">Journal club</div></div>
+    <div class="stat-card"><div class="stat-val" style="color:var(--green)">${read}</div><div class="stat-label">Read</div></div>
+  `;
+}
+
+// =====================================================================
+// LIBRARY
+// =====================================================================
+function formatDate(d) {
+  if (!d) return '';
+  const dt = new Date(d.slice(0,10) + 'T00:00:00');
+  if (isNaN(dt)) return d.slice(0,10);
+  return dt.toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' });
+}
+function doiLink(p, small) {
+  if (!p.doi) return '';
+  const isUrl = p.doi.startsWith('http');
+  return `<a href="${attr(isUrl ? p.doi : 'https://doi.org/' + p.doi)}" target="_blank" rel="noopener" onclick="event.stopPropagation()"${small ? ' style="font-size:10.5px"' : ''}>${isUrl ? 'Link' : 'DOI'} &#8599;</a>`;
+}
+
+function renderLibrary() {
+  const el = document.getElementById('libraryContent');
+  const countEl = document.getElementById('resultCount');
+  if (papers.length === 0) {
+    countEl.innerHTML = '';
+    el.innerHTML = '<div class="empty"><h3>No papers yet</h3><p>Click "+ Add Paper" to get started, or import a JSON or BibTeX file.</p></div>';
+    return;
+  }
+  const list = sortPapers(filteredPapers());
+  lastRendered = list.map(p => p.id);
+
+  const chips = [];
+  Object.entries(filters).forEach(([k, s]) => s.forEach(v => chips.push(`<span class="active-chip" onclick="toggleFilter('${k}','${attr(v)}')">${esc(v)} ×</span>`)));
+  countEl.innerHTML = `<span>${list.length === papers.length ? `${papers.length} papers` : `${list.length} of ${papers.length} papers`}</span>${chips.join('')}`;
+
+  if (list.length === 0) {
+    el.innerHTML = '<div class="empty"><p>No papers match your search and filters.</p><button class="btn btn-secondary btn-sm" onclick="clearFilters()">Clear filters</button></div>';
+    return;
+  }
+
+  el.innerHTML = `<div class="rows">${list.map(p => {
+    const jc = isJC(p) ? `<span class="jc-badge">&#9679; Journal club${p.journalClub.date ? ' · ' + formatDate(p.journalClub.date) : ''}</span>` : '';
+    const findings = p.findings || '';
+    const open = expandedFindings.has(p.id);
+    return `<article class="row" tabindex="0" onclick="openDetail('${p.id}')" onkeydown="if(event.key==='Enter')openDetail('${p.id}')">
+      <button class="status-dot status-${p.status || 'unread'}" onclick="event.stopPropagation();toggleStatus('${p.id}')" title="${p.status || 'unread'} · click to cycle"></button>
+      <div class="row-main">
+        <div class="row-title">${esc(p.title || 'Untitled')}</div>
+        <div class="row-authors">${esc(p.authors || '')}</div>
+        <div class="row-meta">
+          <span class="year">${esc(p.year || '')}</span>
+          ${p.journal ? `<span>${esc(p.journal)}</span>` : ''}
+          ${doiLink(p, true)}
+          ${p.species ? `<span><span class="k">Model</span> ${esc(p.species)}</span>` : ''}
+          ${p.region ? `<span><span class="k">Region</span> ${esc(p.region)}</span>` : ''}
+          ${p.project ? `<span><span class="k">Project</span> ${esc(p.project)}</span>` : ''}
+          ${jc}
+        </div>
+        ${findings ? `<div class="row-findings${open ? ' open' : ''}" onclick="event.stopPropagation();toggleFindings('${p.id}')" title="Click to ${open ? 'collapse' : 'expand'}">${esc(findings)}</div>` : ''}
+      </div>
+      <div class="row-side">
+        <div class="tags">${getTags(p).map(tagHtml).join('')}</div>
+        ${addedDate(p) ? `<span class="added" title="Date added">${formatDate(addedDate(p))}</span>` : ''}
+      </div>
+    </article>`;
+  }).join('')}</div>`;
+}
+
+window.toggleFindings = function(id) {
+  if (expandedFindings.has(id)) expandedFindings.delete(id); else expandedFindings.add(id);
+  renderLibrary();
+};
 
 window.toggleStatus = function(id) {
   const p = papers.find(x => x.id === id);
@@ -600,65 +819,101 @@ window.toggleStatus = function(id) {
   const cycle = ['unread', 'reading', 'read'];
   p.status = cycle[(cycle.indexOf(p.status || 'unread') + 1) % 3];
   save();
-  renderLibrary();
-  renderStats();
+  renderStats(); renderFacets(); renderLibrary();
 };
-
-window.sortBy = function(col) {
-  if (sortCol === col) sortAsc = !sortAsc;
-  else { sortCol = col; sortAsc = true; }
-  renderLibrary();
-};
-
-function renderStats() {
-  const total = papers.length;
-  const read = papers.filter(p => p.status === 'read').length;
-  const regions = {};
-  papers.forEach(p => { if(p.region) p.region.split(/[,;/]/).forEach(r => { r=r.trim(); if(r) regions[r]=(regions[r]||0)+1; }); });
-  const topRegion = Object.entries(regions).sort((a,b)=>b[1]-a[1])[0];
-
-  document.getElementById('statsRow').innerHTML = `
-    <div class="stat-card"><div class="stat-val" style="color:var(--accent)">${total}</div><div class="stat-label">Total Papers</div></div>
-    <div class="stat-card"><div class="stat-val" style="color:var(--green)">${read}</div><div class="stat-label">Read</div></div>
-    <div class="stat-card"><div class="stat-val" style="color:var(--yellow)">${total-read}</div><div class="stat-label">Unread/Reading</div></div>
-    ${topRegion ? `<div class="stat-card"><div class="stat-val" style="color:var(--purple);font-size:16px">${esc(topRegion[0])}</div><div class="stat-label">Top Region (${topRegion[1]} papers)</div></div>` : ''}
-  `;
-}
-
-function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
 
 // =====================================================================
-// TAG FILTERS (auto-generated)
+// JOURNAL CLUB
 // =====================================================================
-function renderTagFilters() {
-  const allTags = getAllTags();
-  const row = document.getElementById('tagFilterRow');
-  row.innerHTML = '<span class="filter-label">Tags:</span>' +
-    `<button class="chip${activeTags.size === 0 ? ' active' : ''}" data-tag="__all__">All</button>` +
-    allTags.map(t => {
-      const c = tagColor(t);
-      const count = papers.filter(p => getTags(p).includes(t)).length;
-      return `<button class="chip${activeTags.has(t) ? ' active' : ''}" data-tag="${esc(t)}" style="${activeTags.has(t) ? 'background:'+c.bg+';color:'+c.fg+';border-color:'+c.fg : ''}">${esc(t)} <span style="opacity:0.6">${count}</span></button>`;
-    }).join('');
-  row.querySelectorAll('.chip').forEach(chip => {
-    chip.addEventListener('click', function() {
-      const val = this.dataset.tag;
-      if (val === '__all__') { activeTags.clear(); }
-      else if (activeTags.has(val)) { activeTags.delete(val); }
-      else { activeTags.add(val); }
-      renderTagFilters();
-      renderLibrary();
-    });
-  });
+function renderJC() {
+  const el = document.getElementById('jcContent');
+  const list = papers.filter(isJC);
+  document.getElementById('jcCount').textContent = list.length;
+  if (list.length === 0) {
+    el.innerHTML = '<div class="empty"><h3>No journal club papers yet</h3><p>Tick "Journal club paper" when adding or editing a paper, and it will appear here with its date and discussion notes.</p></div>';
+    return;
+  }
+  const byDate = (a, b) => (a.journalClub.date || '9999').localeCompare(b.journalClub.date || '9999');
+  const upcoming = list.filter(p => !p.journalClub.date || p.journalClub.date >= TODAY).sort(byDate);
+  const past = list.filter(p => p.journalClub.date && p.journalClub.date < TODAY).sort((a, b) => byDate(b, a));
+
+  const card = p => {
+    const jc = p.journalClub;
+    let dateBlock;
+    if (jc.date) {
+      const dt = new Date(jc.date + 'T00:00:00');
+      dateBlock = `<div class="d">${dt.getDate()}</div><div class="m">${dt.toLocaleDateString(undefined,{month:'short'})}</div><div class="y">${dt.getFullYear()}</div>`;
+    } else {
+      dateBlock = `<div class="tbd">Date TBD</div>`;
+    }
+    return `<div class="jc-card" id="jc-${p.id}">
+      <div class="jc-date">${dateBlock}</div>
+      <div>
+        <div class="jc-title" onclick="openDetail('${p.id}')">${esc(p.title)}</div>
+        <div class="jc-sub">${esc(p.authors || '')}${p.year ? ' (' + esc(p.year) + ')' : ''}${p.journal ? ' · <em>' + esc(p.journal) + '</em>' : ''} ${doiLink(p, true)}</div>
+        <div class="jc-meta">
+          ${jc.presenter ? `<span><span style="color:var(--muted)">Presenter</span> <strong>${esc(jc.presenter)}</strong></span>` : '<span style="color:var(--muted)">No presenter set</span>'}
+          <span class="status-dot status-${p.status || 'unread'}" style="margin:0" onclick="toggleStatus('${p.id}');renderJC()" title="Click to cycle status"></span>
+          ${getTags(p).filter(t => t !== 'journal club').map(tagHtml).join('')}
+        </div>
+        ${p.findings ? `<div class="jc-block"><div class="lbl">Key findings</div>${esc(p.findings)}</div>` : ''}
+        <div class="jc-block">
+          <div class="lbl">Discussion notes</div>
+          <textarea class="jc-discussion" placeholder="Questions to raise, points from the discussion, follow-up papers..." onblur="saveJCDiscussion('${p.id}', this.value)">${esc(jc.discussion || '')}</textarea>
+        </div>
+        <div class="jc-actions">
+          <button class="btn btn-secondary btn-sm" onclick="openDetail('${p.id}')">Details</button>
+          <button class="btn btn-secondary btn-sm" onclick="editPaper('${p.id}')">Edit date / presenter</button>
+          <button class="btn btn-danger btn-sm" onclick="removeFromJC('${p.id}')">Remove from journal club</button>
+        </div>
+      </div>
+    </div>`;
+  };
+
+  el.innerHTML =
+    (upcoming.length ? `<div class="jc-section-title">Upcoming &amp; unscheduled (${upcoming.length})</div>${upcoming.map(card).join('')}` : '') +
+    (past.length ? `<div class="jc-section-title">Past (${past.length})</div>${past.map(card).join('')}` : '');
 }
 
-document.getElementById('searchInput').addEventListener('input', renderLibrary);
-window.clearFilters = function() {
-  document.getElementById('searchInput').value = '';
-  activeTags.clear();
-  renderTagFilters();
-  renderLibrary();
+window.saveJCDiscussion = function(id, val) {
+  const p = papers.find(x => x.id === id);
+  if (!p || !p.journalClub) return;
+  if ((p.journalClub.discussion || '') === val.trim()) return;
+  p.journalClub.discussion = val.trim();
+  save();
 };
+window.removeFromJC = function(id) {
+  const p = papers.find(x => x.id === id);
+  if (!p) return;
+  if (!confirm('Remove this paper from journal club? The paper stays in the library.')) return;
+  delete p.journalClub;
+  p.tags = getTags(p).filter(t => t !== 'journal club');
+  save(); refreshAll();
+};
+window.startAddJC = function() {
+  clearAddForm();
+  document.getElementById('f-jc').checked = true;
+  toggleJCSection();
+  switchTab('add');
+  document.getElementById('doiInput').focus();
+};
+window.toggleJCSection = function() {
+  document.getElementById('jcSection').classList.toggle('on', document.getElementById('f-jc').checked);
+};
+
+// =====================================================================
+// DATALISTS (controlled vocab suggestions)
+// =====================================================================
+function fillDatalists() {
+  const fill = (id, vals) => {
+    const uniq = [...new Set(vals.filter(Boolean))].sort((a, b) => a.localeCompare(b));
+    document.getElementById(id).innerHTML = uniq.map(v => `<option value="${attr(v)}">`).join('');
+  };
+  fill('dl-species', papers.flatMap(speciesTokens));
+  fill('dl-region', papers.flatMap(p => (p.region || '').split(/[,;]/).map(s => s.trim())));
+  fill('dl-journal', papers.map(p => p.journal));
+  fill('dl-project', papers.map(p => p.project));
+}
 
 // =====================================================================
 // TAG INPUT WIDGET (add/edit form)
@@ -667,54 +922,40 @@ const tagInput = document.getElementById('f-tags');
 const tagPillsEl = document.getElementById('tagPills');
 const tagSuggestEl = document.getElementById('tagSuggest');
 
+function getAllTags() {
+  const counts = {};
+  papers.forEach(p => getTags(p).forEach(t => { counts[t] = (counts[t] || 0) + 1; }));
+  return Object.entries(counts).sort((a, b) => b[1] - a[1]).map(e => e[0]);
+}
 function renderFormTagPills() {
   tagPillsEl.innerHTML = currentFormTags.map((t, i) => {
     const c = tagColor(t);
     return `<span class="tag-pill" style="background:${c.bg};color:${c.fg}">${esc(t)} <span class="tag-pill-x" onclick="event.stopPropagation();removeFormTag(${i})">×</span></span>`;
   }).join('');
 }
-
-window.removeFormTag = function(i) {
-  currentFormTags.splice(i, 1);
-  renderFormTagPills();
-};
-
+window.removeFormTag = function(i) { currentFormTags.splice(i, 1); renderFormTagPills(); };
 tagInput.addEventListener('keydown', function(e) {
   if (e.key === 'Enter' || e.key === ',') {
     e.preventDefault();
     const val = this.value.trim().replace(/,+$/, '');
-    if (val && !currentFormTags.includes(val)) {
-      currentFormTags.push(val);
-      renderFormTagPills();
-    }
+    if (val && !currentFormTags.includes(val)) { currentFormTags.push(val); renderFormTagPills(); }
     this.value = '';
     tagSuggestEl.style.display = 'none';
   }
-  if (e.key === 'Backspace' && !this.value && currentFormTags.length) {
-    currentFormTags.pop();
-    renderFormTagPills();
-  }
+  if (e.key === 'Backspace' && !this.value && currentFormTags.length) { currentFormTags.pop(); renderFormTagPills(); }
 });
-
 tagInput.addEventListener('input', function() {
   const val = this.value.toLowerCase().trim();
   if (!val) { tagSuggestEl.style.display = 'none'; return; }
   const suggestions = getAllTags().filter(t => t.toLowerCase().includes(val) && !currentFormTags.includes(t));
   if (!suggestions.length) { tagSuggestEl.style.display = 'none'; return; }
-  tagSuggestEl.innerHTML = suggestions.slice(0, 8).map(t => {
-    const c = tagColor(t);
-    return `<div class="tag-suggest-item" onmousedown="addSuggestedTag('${esc(t).replace(/'/g, "\\'")}')">${tagHtml(t)}</div>`;
-  }).join('');
+  tagSuggestEl.innerHTML = suggestions.slice(0, 8).map(t =>
+    `<div class="tag-suggest-item" onmousedown="addSuggestedTag('${attr(t)}')">${tagHtml(t)}</div>`).join('');
   tagSuggestEl.style.display = 'block';
 });
-
 tagInput.addEventListener('blur', () => { setTimeout(() => { tagSuggestEl.style.display = 'none'; }, 150); });
-
 window.addSuggestedTag = function(tag) {
-  if (!currentFormTags.includes(tag)) {
-    currentFormTags.push(tag);
-    renderFormTagPills();
-  }
+  if (!currentFormTags.includes(tag)) { currentFormTags.push(tag); renderFormTagPills(); }
   tagInput.value = '';
   tagSuggestEl.style.display = 'none';
 };
@@ -732,6 +973,7 @@ window.lookupDOI = async function() {
     /doi\.org\/(10\.\d{4,}\/[^\s?#]+)/,
     /nature\.com\/articles\/(s\d+[-\w]+)/,
     /science\.org\/doi\/(10\.\d{4,}\/[^\s?#]+)/,
+    /journals\.sagepub\.com\/doi\/(?:abs\/|full\/|pdf\/)?(10\.\d{4,}\/[^\s?#]+)/,
     /sciencedirect\.com\/science\/article\/pii\/(\w+)/,
     /cell\.com\/[^/]+\/fulltext\/(S[\w()-]+)/,
     /pubmed\.ncbi\.nlm\.nih\.gov\/(\d+)/,
@@ -739,7 +981,6 @@ window.lookupDOI = async function() {
     /medrxiv\.org\/content\/(10\.\d{4,}\/[^\s?#]+)/,
     /(10\.\d{4,}\/[^\s?#]+)/,
   ];
-
   let isPubMed = false, isCellPII = false;
   for (const pat of urlPatterns) {
     const m = input.match(pat);
@@ -747,14 +988,12 @@ window.lookupDOI = async function() {
       if (input.includes('pubmed.ncbi')) { isPubMed = true; doi = m[1]; }
       else if (input.includes('nature.com/articles/') && !m[1].startsWith('10.')) { doi = '10.1038/' + m[1]; }
       else if ((input.includes('sciencedirect.com') || input.includes('cell.com')) && m[1].startsWith('S')) { isCellPII = true; doi = m[1]; }
-      else { doi = m[1]; }
+      else { doi = m[1].replace(/[.,;)]+$/, ''); }
       break;
     }
   }
-
   status.className = 'doi-status loading';
   status.textContent = 'Looking up...';
-
   try {
     let url;
     if (isPubMed) {
@@ -768,22 +1007,29 @@ window.lookupDOI = async function() {
     } else {
       url = 'https://api.crossref.org/works?query=' + encodeURIComponent(input) + '&rows=1';
     }
-
     const resp = await fetch(url);
     if (!resp.ok) throw new Error('Not found');
     const data = await resp.json();
-    let item = data.message.items ? data.message.items[0] : data.message;
+    const item = data.message.items ? data.message.items[0] : data.message;
     if (!item) throw new Error('No results');
 
+    const foundDoi = item.DOI || doi;
+    const dup = papers.find(p => p.doi && p.doi.toLowerCase() === foundDoi.toLowerCase() && p.id !== editingId);
+
     document.getElementById('f-title').value = (item.title && item.title[0]) || '';
-    document.getElementById('f-authors').value = (item.author || []).map(a => (a.family||'') + ', ' + (a.given||'')).join('; ');
+    document.getElementById('f-authors').value = (item.author || []).map(a => (a.family || '') + ', ' + (a.given || '')).join('; ');
     document.getElementById('f-year').value = item.published?.['date-parts']?.[0]?.[0] || item.created?.['date-parts']?.[0]?.[0] || '';
     document.getElementById('f-journal').value = (item['container-title'] && item['container-title'][0]) || item.publisher || '';
-    document.getElementById('f-doi').value = item.DOI || doi;
-    document.getElementById('f-abstract').value = (item.abstract || '').replace(/<[^>]*>/g, '');
+    document.getElementById('f-doi').value = foundDoi;
+    document.getElementById('f-abstract').value = (item.abstract || '').replace(/<[^>]*>/g, '').trim();
 
-    status.className = 'doi-status ok';
-    status.textContent = 'Found! Fill in the remaining fields below.';
+    if (dup) {
+      status.className = 'doi-status err';
+      status.innerHTML = `Already in your library: <a href="#" onclick="event.preventDefault();openDetail('${dup.id}')">${esc(dup.title)}</a>. Saving will create a duplicate.`;
+    } else {
+      status.className = 'doi-status ok';
+      status.textContent = 'Found. Fill in the remaining fields below.';
+    }
   } catch(e) {
     status.className = 'doi-status err';
     status.textContent = 'Not found. Try a different DOI or enter details manually.';
@@ -793,7 +1039,10 @@ window.lookupDOI = async function() {
 // =====================================================================
 // SAVE / EDIT / DELETE PAPER
 // =====================================================================
+const FORM_FIELDS = ['title','authors','year','journal','doi','species','region','methods','project','funding','abstract','findings','notes'];
+
 window.savePaper = function() {
+  const existing = editingId ? papers.find(p => p.id === editingId) : null;
   const paper = {
     id: editingId || Date.now().toString(36) + Math.random().toString(36).slice(2,6),
     title: document.getElementById('f-title').value.trim(),
@@ -811,55 +1060,77 @@ window.savePaper = function() {
     abstract: document.getElementById('f-abstract').value.trim(),
     findings: document.getElementById('f-findings').value.trim(),
     notes: document.getElementById('f-notes').value.trim(),
-    added: new Date().toISOString(),
+    added: existing?.added || TODAY,
   };
+  if (existing?.pdf) paper.pdf = existing.pdf;
   if (!paper.title) { alert('Title is required'); return; }
 
-  if (editingId) {
-    const idx = papers.findIndex(p => p.id === editingId);
-    if (idx >= 0) { paper.added = papers[idx].added; papers[idx] = paper; }
+  if (document.getElementById('f-jc').checked) {
+    paper.journalClub = {
+      date: document.getElementById('f-jc-date').value,
+      presenter: document.getElementById('f-jc-presenter').value.trim(),
+      discussion: document.getElementById('f-jc-discussion').value.trim(),
+    };
+    if (!paper.tags.includes('journal club')) paper.tags.unshift('journal club');
+  }
+
+  if (existing) {
+    papers[papers.findIndex(p => p.id === editingId)] = paper;
     editingId = null;
   } else {
     papers.unshift(paper);
   }
   save();
+  const wasJC = !!paper.journalClub;
   clearAddForm();
-  renderTagFilters();
-  switchTabDirect('library');
-  renderLibrary();
+  refreshAll();
+  switchTab(wasJC ? 'jc' : 'library');
 };
 
 window.clearAddForm = function() {
   editingId = null;
-  ['title','authors','year','journal','doi','species','region','methods','project','funding','abstract','findings','notes'].forEach(f => {
-    document.getElementById('f-'+f).value = '';
-  });
+  FORM_FIELDS.forEach(f => { document.getElementById('f-' + f).value = ''; });
   currentFormTags = [];
   renderFormTagPills();
   document.getElementById('f-tags').value = '';
   document.getElementById('f-status').value = 'unread';
+  document.getElementById('f-jc').checked = false;
+  ['f-jc-date','f-jc-presenter','f-jc-discussion'].forEach(id => { document.getElementById(id).value = ''; });
+  toggleJCSection();
+  document.getElementById('doiInput').value = '';
   document.getElementById('doiStatus').textContent = '';
+  document.getElementById('doiStatus').className = 'doi-status';
+  document.getElementById('addFormTitle').textContent = 'Add New Paper';
+  document.getElementById('saveBtn').textContent = 'Save Paper';
 };
 
 window.editPaper = function(id) {
   const p = papers.find(x => x.id === id);
   if (!p) return;
   closeDetail();
+  clearAddForm();
   editingId = id;
-  ['title','authors','year','journal','doi','species','region','methods','project','funding','abstract','findings','notes'].forEach(f => {
-    document.getElementById('f-'+f).value = p[f] || '';
-  });
+  FORM_FIELDS.forEach(f => { document.getElementById('f-' + f).value = p[f] || ''; });
   currentFormTags = [...getTags(p)];
   renderFormTagPills();
-  document.getElementById('f-tags').value = '';
   document.getElementById('f-status').value = p.status || 'unread';
-  switchTabDirect('add');
+  if (p.journalClub) {
+    document.getElementById('f-jc').checked = true;
+    document.getElementById('f-jc-date').value = p.journalClub.date || '';
+    document.getElementById('f-jc-presenter').value = p.journalClub.presenter || '';
+    document.getElementById('f-jc-discussion').value = p.journalClub.discussion || '';
+  }
+  toggleJCSection();
+  document.getElementById('addFormTitle').textContent = 'Edit Paper';
+  document.getElementById('saveBtn').textContent = 'Save Changes';
+  switchTab('add');
+  window.scrollTo({ top: 0 });
 };
 
 window.deletePaper = function(id) {
   if (!confirm('Delete this paper?')) return;
   papers = papers.filter(p => p.id !== id);
-  save(); closeDetail(); renderLibrary();
+  save(); closeDetail(); refreshAll();
 };
 
 // =====================================================================
@@ -868,32 +1139,40 @@ window.deletePaper = function(id) {
 window.openDetail = function(id) {
   const p = papers.find(x => x.id === id);
   if (!p) return;
+  detailId = id;
+  const idx = lastRendered.indexOf(id);
+  document.getElementById('detailPrev').disabled = idx <= 0;
+  document.getElementById('detailNext').disabled = idx < 0 || idx >= lastRendered.length - 1;
+  const jc = p.journalClub;
   const el = document.getElementById('detailContent');
   el.innerHTML = `
-    <h2 style="font-size:18px;margin-bottom:4px;padding-right:30px">${esc(p.title)}</h2>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">${esc(p.authors||'')} ${p.year ? '('+p.year+')' : ''} &middot; <em>${esc(p.journal||'')}</em>
-      ${p.doi ? ' &middot; <a href="https://doi.org/'+esc(p.doi)+'" target="_blank" style="color:var(--accent)">DOI</a>' : ''}</p>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
-      ${getTags(p).map(t => tagHtml(t)).join(' ')}
-      <span class="status-dot status-${p.status||'unread'}" onclick="toggleStatus('${p.id}');openDetail('${p.id}')" style="cursor:pointer"></span><span style="font-size:12px;cursor:pointer" onclick="toggleStatus('${p.id}');openDetail('${p.id}')">${p.status||'unread'}</span>
-      ${p.species ? '<span style="font-size:12px;color:var(--muted)">Model: <strong style="color:var(--text)">'+esc(p.species)+'</strong></span>' : ''}
-      ${p.region ? '<span style="font-size:12px;color:var(--muted)">Region: <strong style="color:var(--text)">'+esc(p.region)+'</strong></span>' : ''}
-      ${p.project ? '<span style="font-size:12px;color:var(--muted)">Project: <strong style="color:var(--text)">'+esc(p.project)+'</strong></span>' : ''}
+    <h2 style="font-size:18px;margin-bottom:4px;padding-right:90px;line-height:1.35">${esc(p.title)}</h2>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:14px">${esc(p.authors || '')} ${p.year ? '(' + esc(p.year) + ')' : ''} &middot; <em>${esc(p.journal || '')}</em>
+      ${p.doi ? ' &middot; ' + doiLink(p) : ''}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+      ${getTags(p).map(tagHtml).join(' ')}
+      <span class="status-dot status-${p.status || 'unread'}" style="margin:0" onclick="toggleStatus('${p.id}');openDetail('${p.id}')" title="Click to cycle"></span><span style="font-size:12px;cursor:pointer" onclick="toggleStatus('${p.id}');openDetail('${p.id}')">${esc(p.status || 'unread')}</span>
+      ${p.species ? '<span style="font-size:12px;color:var(--muted)">Model: <strong style="color:var(--text)">' + esc(p.species) + '</strong></span>' : ''}
+      ${p.region ? '<span style="font-size:12px;color:var(--muted)">Region: <strong style="color:var(--text)">' + esc(p.region) + '</strong></span>' : ''}
+      ${p.project ? '<span style="font-size:12px;color:var(--muted)">Project: <strong style="color:var(--text)">' + esc(p.project) + '</strong></span>' : ''}
+      ${addedDate(p) ? '<span style="font-size:11px;color:var(--muted);font-family:\'DM Mono\',monospace">added ' + formatDate(addedDate(p)) + '</span>' : ''}
     </div>
-    ${p.findings ? '<div style="background:var(--bg3);border-radius:8px;padding:12px;margin-bottom:12px"><div style="font-size:11px;color:var(--accent);font-weight:600;margin-bottom:4px">KEY FINDINGS</div><div style="font-size:13px">'+esc(p.findings)+'</div></div>' : ''}
-    ${p.methods ? '<div style="margin-bottom:8px;font-size:12px"><span style="color:var(--muted)">Methods:</span> '+esc(p.methods)+'</div>' : ''}
-    ${p.funding ? '<div style="margin-bottom:8px;font-size:12px"><span style="color:var(--muted)">Funding:</span> '+esc(p.funding)+'</div>' : ''}
-    ${p.abstract ? '<div style="margin-bottom:12px"><div style="font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px">ABSTRACT</div><div style="font-size:12px;color:#bbb;line-height:1.7">'+esc(p.abstract)+'</div></div>' : ''}
-    ${p.notes ? '<div style="background:rgba(251,191,36,0.06);border-radius:8px;padding:12px;border-left:3px solid var(--yellow)"><div style="font-size:11px;color:var(--yellow);font-weight:600;margin-bottom:4px">YOUR NOTES</div><div style="font-size:13px">'+esc(p.notes)+'</div></div>' : ''}
+    ${jc ? `<div class="d-box" style="border-left:3px solid var(--pink)"><div class="d-lbl" style="color:var(--pink)">JOURNAL CLUB</div><div style="font-size:13px">${jc.date ? formatDate(jc.date) : 'Date TBD'}${jc.presenter ? ' &middot; presented by <strong>' + esc(jc.presenter) + '</strong>' : ''}</div>${jc.discussion ? '<div style="font-size:12.5px;color:var(--text2);margin-top:6px;white-space:pre-wrap">' + esc(jc.discussion) + '</div>' : ''}</div>` : ''}
+    ${p.findings ? '<div class="d-box"><div class="d-lbl" style="color:var(--accent)">KEY FINDINGS</div><div style="font-size:13px;line-height:1.55">' + esc(p.findings) + '</div></div>' : ''}
+    ${p.methods ? '<div style="margin-bottom:8px;font-size:12px"><span style="color:var(--muted)">Methods:</span> ' + esc(p.methods) + '</div>' : ''}
+    ${p.funding ? '<div style="margin-bottom:8px;font-size:12px"><span style="color:var(--muted)">Funding:</span> ' + esc(p.funding) + '</div>' : ''}
+    ${p.pdf ? '<div style="margin-bottom:8px;font-size:12px"><span style="color:var(--muted)">PDF:</span> <span style="font-family:\'DM Mono\',monospace;font-size:11px">' + esc(p.pdf) + '</span></div>' : ''}
+    ${p.abstract ? '<div style="margin:12px 0"><div class="d-lbl" style="color:var(--muted)">ABSTRACT</div><div style="font-size:12.5px;color:var(--text2);line-height:1.7">' + esc(p.abstract) + '</div></div>' : ''}
+    ${p.notes ? '<div class="d-box" style="background:rgba(251,191,36,0.06);border-left:3px solid var(--yellow)"><div class="d-lbl" style="color:var(--yellow)">YOUR NOTES</div><div style="font-size:13px;white-space:pre-wrap">' + esc(p.notes) + '</div></div>' : ''}
     <div style="margin-top:16px;margin-bottom:12px">
-      <div style="font-size:11px;color:var(--muted);font-weight:600;margin-bottom:6px">CITE AS</div>
-      <div style="display:flex;gap:6px;margin-bottom:8px">
+      <div class="d-lbl" style="color:var(--muted);margin-bottom:6px">CITE AS</div>
+      <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
         <button class="btn btn-secondary btn-sm" onclick="copyCitation('${p.id}','nature')">Nature</button>
         <button class="btn btn-secondary btn-sm" onclick="copyCitation('${p.id}','cell')">Cell</button>
         <button class="btn btn-secondary btn-sm" onclick="copyCitation('${p.id}','science')">Science</button>
         <button class="btn btn-secondary btn-sm" onclick="copyCitation('${p.id}','bibtex')">BibTeX</button>
       </div>
-      <div id="citationText" style="font-size:12px;color:#bbb;background:var(--bg3);padding:10px;border-radius:6px;display:none;line-height:1.6;cursor:pointer;white-space:pre-wrap;font-family:'DM Mono',monospace" title="Click to copy" onclick="navigator.clipboard.writeText(this.textContent)"></div>
+      <div id="citationText" style="font-size:12px;color:var(--text2);background:var(--bg3);padding:10px;border-radius:6px;display:none;line-height:1.6;cursor:pointer;white-space:pre-wrap;font-family:'DM Mono',monospace" title="Click to copy" onclick="navigator.clipboard.writeText(this.textContent)"></div>
     </div>
     <div class="form-actions" style="margin-top:20px">
       <button class="btn btn-danger btn-sm" onclick="deletePaper('${p.id}')">Delete</button>
@@ -903,41 +1182,37 @@ window.openDetail = function(id) {
   `;
   document.getElementById('detailOverlay').classList.add('open');
 };
-
-window.closeDetail = function() {
-  document.getElementById('detailOverlay').classList.remove('open');
+window.closeDetail = function() { document.getElementById('detailOverlay').classList.remove('open'); detailId = null; };
+window.detailStep = function(dir) {
+  const idx = lastRendered.indexOf(detailId);
+  if (idx < 0) return;
+  const next = lastRendered[idx + dir];
+  if (next) openDetail(next);
 };
 
 window.copyCitation = function(id, style) {
   const p = papers.find(x => x.id === id);
   if (!p) return;
-
   const authorList = (p.authors || '').split(';').map(a => a.trim()).filter(a => a);
-  const formatAuthor = (a, style) => {
+  const formatAuthor = (a, st) => {
     const parts = a.split(',').map(s => s.trim());
     const last = parts[0] || '';
     const first = parts[1] || '';
     const initials = first.split(/[\s.-]+/).map(n => n[0]).filter(n => n).join('.');
-    if (style === 'nature') return last + ', ' + initials + '.';
-    if (style === 'cell') return last + ', ' + initials + '.';
-    if (style === 'science') return initials + '. ' + last;
+    if (st === 'nature' || st === 'cell') return last + ', ' + initials + '.';
+    if (st === 'science') return initials + '. ' + last;
     return a;
   };
-
   let citation = '';
-  const year = p.year || '';
-  const title = p.title || '';
-  const journal = p.journal || '';
-  const doi = p.doi || '';
+  const year = p.year || '', title = p.title || '', journal = p.journal || '', doi = p.doi || '';
   const doiUrl = doi.startsWith('http') ? doi : (doi ? 'https://doi.org/' + doi : '');
 
   if (style === 'nature') {
-    let authors = authorList.length > 5
+    const authors = authorList.length > 5
       ? authorList.slice(0, 5).map(a => formatAuthor(a, 'nature')).join(', ') + ' et al.'
       : authorList.map(a => formatAuthor(a, 'nature')).join(', ');
     citation = authors + ' ' + title + '. ' + journal + (year ? ' (' + year + ')' : '') + '.' + (doiUrl ? ' ' + doiUrl : '');
   }
-
   if (style === 'cell') {
     let authors;
     if (authorList.length > 5) authors = authorList.slice(0, 5).map(a => formatAuthor(a, 'cell')).join(', ') + ', et al.';
@@ -945,19 +1220,16 @@ window.copyCitation = function(id, style) {
     else authors = authorList.map(a => formatAuthor(a, 'cell')).join('');
     citation = authors + (year ? ' (' + year + ')' : '') + '. ' + title + '. ' + journal + '.' + (doiUrl ? ' ' + doiUrl : '');
   }
-
   if (style === 'science') {
-    let authors = authorList.length > 5
+    const authors = authorList.length > 5
       ? authorList.slice(0, 5).map(a => formatAuthor(a, 'science')).join(', ') + ', et al.'
       : authorList.map(a => formatAuthor(a, 'science')).join(', ');
     citation = authors + ', ' + title + '. ' + journal + (year ? ' (' + year + ')' : '') + '.' + (doiUrl ? ' ' + doiUrl : '');
   }
-
   if (style === 'bibtex') {
     const key = (authorList[0]?.split(',')[0] || 'unknown').toLowerCase().replace(/\s+/g,'') + (year || '');
     citation = `@article{${key},\n  title     = {${title}},\n  author    = {${authorList.join(' and ')}},\n  journal   = {${journal}},\n  year      = {${year}},\n  doi       = {${doi}}\n}`;
   }
-
   const el = document.getElementById('citationText');
   el.textContent = citation;
   el.style.display = 'block';
@@ -977,20 +1249,16 @@ window.generateClaudePrompt = function() {
   else if (filter === 'no-species') subset = papers.filter(p => !p.species);
   else subset = papers;
   if (subset.length === 0) { alert('No papers match this filter.'); return; }
-
-  const prompt = `I have ${subset.length} academic papers. For each, extract the following fields from the abstract/title. Return a JSON array.\n\nFields to extract:\n- doi (string, keep as-is)\n- species (e.g. "mouse", "rat", "human", "in vitro")\n- region (brain region or topic)\n- tags (array of keywords, e.g. ["single-cell atlas", "AD", "ML", "LC", "behavioral methods", "computational", "aging", "review", "connectomics"])\n- methods (key techniques, comma-separated)\n- findings (1-2 sentence summary)\n- funding (if mentioned)\n\nPapers:\n${subset.map((p, i) => `\n--- Paper ${i+1} ---\nDOI: ${p.doi || 'N/A'}\nTitle: ${p.title}\nAbstract: ${(p.abstract || 'No abstract available').substring(0, 500)}`).join('\n')}\n\nReturn ONLY a JSON array.`;
-
+  const prompt = `I have ${subset.length} academic papers. For each, extract the following fields from the abstract/title. Return a JSON array.\n\nFields to extract:\n- doi (string, keep as-is)\n- species (e.g. "mouse", "rat", "human", "in vitro")\n- region (brain region or topic)\n- tags (array of keywords, e.g. ["single-cell atlas", "AD/neurodegeneration", "LC/norepinephrine", "behavioral methods", "computational", "aging", "review", "connectomics"])\n- methods (key techniques, comma-separated)\n- findings (1-3 sentence summary)\n- funding (if mentioned)\n\nPapers:\n${subset.map((p, i) => `\n--- Paper ${i+1} ---\nDOI: ${p.doi || 'N/A'}\nTitle: ${p.title}\nAbstract: ${(p.abstract || 'No abstract available').substring(0, 500)}`).join('\n')}\n\nReturn ONLY a JSON array.`;
   document.getElementById('claudePrompt').textContent = prompt;
   document.getElementById('claudeBox').style.display = 'block';
 };
-
-window.copyClaudePrompt = function() {
+window.copyClaudePrompt = function(btn) {
   navigator.clipboard.writeText(document.getElementById('claudePrompt').textContent).then(() => {
-    event.target.textContent = 'Copied!';
-    setTimeout(() => { event.target.textContent = 'Copy to Clipboard'; }, 1500);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy to Clipboard'; }, 1500);
   });
 };
-
 window.applyClaudeResponse = function() {
   const raw = document.getElementById('claudeResponse').value.trim();
   const status = document.getElementById('claudeApplyStatus');
@@ -1000,7 +1268,6 @@ window.applyClaudeResponse = function() {
     if (match) jsonStr = match[0];
     const data = JSON.parse(jsonStr);
     if (!Array.isArray(data)) throw new Error('Expected an array');
-
     let updated = 0;
     data.forEach(d => {
       let paper = null;
@@ -1017,8 +1284,7 @@ window.applyClaudeResponse = function() {
         updated++;
       }
     });
-
-    save(); renderTagFilters(); renderLibrary();
+    save(); refreshAll();
     status.style.color = 'var(--green)';
     status.textContent = `Updated ${updated} of ${data.length} papers.`;
   } catch(e) {
@@ -1034,13 +1300,10 @@ window.exportJSON = function() {
   const blob = new Blob([JSON.stringify(papers, null, 2)], {type: 'application/json'});
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'paper_hub_' + new Date().toISOString().slice(0,10) + '.json';
+  a.download = 'paper_hub_' + TODAY + '.json';
   a.click();
 };
-
-window.importJSON = function() {
-  document.getElementById('importFile').click();
-};
+window.importJSON = function() { document.getElementById('importFile').click(); };
 
 document.getElementById('importFile').addEventListener('change', function(e) {
   const file = e.target.files[0];
@@ -1049,14 +1312,7 @@ document.getElementById('importFile').addEventListener('change', function(e) {
   reader.onload = function(ev) {
     try {
       const text = ev.target.result;
-      let data;
-
-      if (file.name.endsWith('.bib')) {
-        data = parseBibtex(text);
-      } else {
-        data = JSON.parse(text);
-      }
-
+      const data = file.name.endsWith('.bib') ? parseBibtex(text) : JSON.parse(text);
       if (!Array.isArray(data)) throw new Error('Expected an array');
       let added = 0;
       data.forEach(d => {
@@ -1066,11 +1322,12 @@ document.getElementById('importFile').addEventListener('change', function(e) {
         );
         if (!exists) {
           if (!d.id) d.id = Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+          if (!d.added) d.added = TODAY;
           papers.push(d);
           added++;
         }
       });
-      migrateTags(); save(); renderTagFilters(); renderLibrary();
+      migrate(); save(); refreshAll();
       alert(`Imported ${added} new papers (${data.length - added} duplicates skipped).`);
     } catch(err) {
       alert('Import error: ' + err.message);
@@ -1080,7 +1337,6 @@ document.getElementById('importFile').addEventListener('change', function(e) {
   e.target.value = '';
 });
 
-// BibTeX parser
 function parseBibtex(text) {
   const entries = [];
   const entryRe = /@(\w+)\s*\{([^,]*),([^@]*)\}/g;
@@ -1090,9 +1346,7 @@ function parseBibtex(text) {
     const body = m[3];
     const fieldRe = /(\w+)\s*=\s*\{([^}]*)\}/g;
     let fm;
-    while ((fm = fieldRe.exec(body)) !== null) {
-      fields[fm[1].toLowerCase()] = fm[2].trim();
-    }
+    while ((fm = fieldRe.exec(body)) !== null) fields[fm[1].toLowerCase()] = fm[2].trim();
     entries.push({
       id: Date.now().toString(36) + Math.random().toString(36).slice(2,6),
       title: fields.title || '',
@@ -1101,30 +1355,29 @@ function parseBibtex(text) {
       journal: fields.journal || fields.booktitle || '',
       doi: fields.doi || '',
       abstract: fields.abstract || '',
-      status: 'unread',
-      tags: [],
-      species: '',
-      region: '',
-      methods: '',
-      findings: '',
-      notes: '',
-      project: '',
-      funding: '',
-      added: new Date().toISOString(),
+      status: 'unread', tags: [], species: '', region: '', methods: '', findings: '', notes: '', project: '', funding: '',
+      added: TODAY,
     });
   }
   return entries;
 }
 
 // =====================================================================
-// INIT
+// KEYBOARD + OVERLAYS
 // =====================================================================
-document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeDetail(); closeSetup(); } });
+document.addEventListener('keydown', e => {
+  const detailOpen = document.getElementById('detailOverlay').classList.contains('open');
+  if (e.key === 'Escape') { closeDetail(); closeSetup(); return; }
+  if (detailOpen && e.key === 'ArrowLeft') { detailStep(-1); e.preventDefault(); }
+  if (detailOpen && e.key === 'ArrowRight') { detailStep(1); e.preventDefault(); }
+  if (!detailOpen && e.key === '/' && !['INPUT','TEXTAREA','SELECT'].includes(document.activeElement.tagName)) {
+    e.preventDefault(); switchTab('library'); document.getElementById('searchInput').focus();
+  }
+});
 document.getElementById('detailOverlay').addEventListener('click', e => { if (e.target === e.currentTarget) closeDetail(); });
 document.getElementById('setupModal').addEventListener('click', e => { if (e.target === e.currentTarget) closeSetup(); });
 
 init();
-
 })();
 </script>
 </body>
