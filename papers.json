@@ -1,5 +1,35 @@
 [
   {
+    "id": "stuart-sakmann-1994-dendritic-backprop",
+    "title": "Active propagation of somatic action potentials into neocortical pyramidal cell dendrites",
+    "authors": "Stuart, G.J.; Sakmann, B.",
+    "year": "1994",
+    "journal": "Nature",
+    "doi": "10.1038/367069a0",
+    "species": "rat",
+    "region": "neocortex, layer V pyramidal neurons, apical dendrite",
+    "tags": [
+      "journal club",
+      "dendrites",
+      "electrophysiology",
+      "classic"
+    ],
+    "methods": "patch clamp in acute neocortical slices, outside-out dendritic patches, simultaneous dual whole-cell soma-dendrite and soma-axon recording, two-dye fills, TTX, intracellular QX-314, cadmium, simulated AP voltage-clamp command",
+    "status": "unread",
+    "project": "",
+    "funding": "",
+    "abstract": "Dendrites were considered passive structures that funnel synaptic potentials to the axon initial segment, but many neurons have active dendritic conductances. Using patch-clamp recordings from the apical dendrites of layer V pyramidal neurons in rat neocortical slices, the authors find voltage-activated Na+ currents in dendritic patches at the same density as the soma. Simultaneous whole-cell recordings from soma and dendrite, or soma and axon, of the same cell show that action potentials evoked by somatic or dendritic current, or by distal synaptic stimulation, are initiated first in the axon and then actively propagate back into the dendritic tree at about 0.15 m/s at room temperature.",
+    "findings": "Dendritic Na+ channels exist at somatic density along the apical dendrite, but action potentials still initiate in the axon, not the soma or dendrite, even for distal synaptic input. The AP then back-propagates actively into the dendrite: it reaches 70% of somatic amplitude versus 33% for a passive simulated AP, and local QX-314 shrinks the dendritic but not the somatic spike. Classic demonstration of axonal initiation plus active back-propagation, the retrograde signal later tied to coincidence detection and synaptic plasticity.",
+    "notes": "Class discussion paper. Nature 367:69-72, 6 Jan 1994. Be ready on motivating question, methods, results, interpretation, implications, caveats; the prep outline is in the journal club discussion notes.",
+    "pdf": "Stuart_Sakmann_1994.pdf",
+    "journalClub": {
+      "date": "",
+      "presenter": "",
+      "discussion": "MOTIVATING QUESTION\nDendrites were long treated as passive cables that funnel synaptic potentials to the soma and axon initial segment. Newer work showed dendrites have voltage-gated channels. So: do the Na+ channels in layer V pyramidal cell apical dendrites let action potentials start in the dendrite? And if not, where do APs start, and what do dendritic channels actually do?\n\nMETHODS\n- 300 um parasagittal neocortical slices, 2-week-old Wistar rats, mostly room temperature (some at 35 C).\n- Outside-out patches from visually identified apical dendrites (63-530 um from soma) vs somatic patches: Na+ current density, TTX block.\n- Dual whole-cell recording from soma + apical dendrite of the SAME cell (confirmed by filling with two dyes, Cascade blue and Lucifer yellow). APs evoked by somatic current, dendritic current, or distal layer I synaptic stimulation; latency of peak compared.\n- Soma + axon dual recordings (axon 10-35 um from soma) to separate axonal from somatic initiation.\n- Intracellular QX-314 in the dendritic pipette to block dendritic Na+ channels locally; cadmium to isolate Ca2+ spikes.\n- Passive-vs-active test: in TTX, play the previously recorded somatic AP back as a voltage-clamp command at the soma and measure how much reaches the same dendritic site, compared with the real evoked AP.\n\nRESULTS\n- Dendritic Na+ channel density equals somatic (~7 pA per patch, ~40 pS/um2) out to 530 um.\n- APs can be evoked by dendritic current, but amplitude falls with distance (Fig 1d) and they are smaller and broader than somatic APs.\n- With soma + dendrite recordings, the AP almost always peaks first at the soma, whether evoked by somatic current, dendritic current, or distal synaptic input (n=32 and n=5). Latency grows linearly with distance: ~0.15 m/s conduction soma to dendrite at room temp, 2-3x faster at 35 C.\n- Only very strong dendritic current (to ~0 mV; e.g. 5 nA) could shift initiation to the dendrite.\n- Soma + axon recordings: AP always appears first in the axon (n=4). Initiation site is axonal.\n- QX-314 in the dendrite shrinks the dendritic AP progressively while the somatic AP is unchanged: dendritic Na+ channels do not initiate but do boost the back-propagating AP.\n- Simulated (passive) AP reached only 33% of somatic amplitude at the dendrite vs 70% for the real AP (165-470 um). Propagation is active.\n- Dendrites also carry Ca2+ spikes (Cd2+ sensitive) when Na+ channels are blocked.\n\nINTERPRETATION\nAPs initiate in the axon (initial segment), not soma or dendrite, even for distal synaptic input, then actively back-propagate into the apical dendrite with the help of dendritic Na+ channels. The dendrite is active, but its job is retrograde amplification, not initiation.\n\nIMPLICATIONS\n- Back-propagating AP = retrograde signal telling synapses the cell fired. Candidate mechanism for coincidence detection and Hebbian plasticity: dendritic depolarization can open Ca2+ channels, relieve Mg2+ block of NMDA receptors, and gate K+ conductances that shunt synaptic input.\n- Foundations for later work: dendritic spikes, BAC firing (Larkum 1999), spike-timing-dependent plasticity, and the role of the axon initial segment.\n- Technical: established dual soma-dendrite patch recording as the way to study dendritic physiology.\n\nCAVEATS\n- Young animals (2 weeks) and mostly room temperature; conduction and channel density change with development and temperature.\n- Slice preparation; distal tuft and basal dendrites not sampled (recordings <= 530 um). Cut dendrites or axons could alter excitability.\n- Small n for key claims (axon recordings n=4; synaptic initiation n=5 at room temp, n=8 at 35 C).\n- Current injection is not natural synaptic input; whether in vivo input patterns can trigger dendritic initiation stayed open (later shown to happen with strong distributed input).\n- Patch pipettes on thin dendrites may shunt or dialyze the membrane; QX-314 also blocks some K+ and Ca2+ conductances.\n- Passive-propagation control relies on somatic voltage clamp of an extended cell (space clamp limitations)."
+    },
+    "added": "2026-09-30"
+  },
+  {
     "id": "paller-2017-tmr-sleep",
     "title": "Sleeping in a Brave New World: Opportunities for Improving Learning and Clinical Outcomes Through Targeted Memory Reactivation",
     "authors": "Paller, K.A.",

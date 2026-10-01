@@ -859,7 +859,7 @@ function renderJC() {
         ${p.findings ? `<div class="jc-block"><div class="lbl">Key findings</div>${esc(p.findings)}</div>` : ''}
         <div class="jc-block">
           <div class="lbl">Discussion notes</div>
-          <textarea class="jc-discussion" placeholder="Questions to raise, points from the discussion, follow-up papers..." onblur="saveJCDiscussion('${p.id}', this.value)">${esc(jc.discussion || '')}</textarea>
+          <textarea class="jc-discussion" placeholder="Questions to raise, points from the discussion, follow-up papers..." oninput="autoGrow(this)" onblur="saveJCDiscussion('${p.id}', this.value)">${esc(jc.discussion || '')}</textarea>
         </div>
         <div class="jc-actions">
           <button class="btn btn-secondary btn-sm" onclick="openDetail('${p.id}')">Details</button>
@@ -873,8 +873,11 @@ function renderJC() {
   el.innerHTML =
     (upcoming.length ? `<div class="jc-section-title">Upcoming &amp; unscheduled (${upcoming.length})</div>${upcoming.map(card).join('')}` : '') +
     (past.length ? `<div class="jc-section-title">Past (${past.length})</div>${past.map(card).join('')}` : '');
+  el.querySelectorAll('.jc-discussion').forEach(autoGrow);
 }
+function autoGrow(ta) { ta.style.height = 'auto'; ta.style.height = Math.max(64, ta.scrollHeight + 2) + 'px'; }
 
+window.autoGrow = autoGrow;
 window.saveJCDiscussion = function(id, val) {
   const p = papers.find(x => x.id === id);
   if (!p || !p.journalClub) return;
